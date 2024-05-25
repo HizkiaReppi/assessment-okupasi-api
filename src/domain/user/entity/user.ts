@@ -41,7 +41,7 @@ export type UserRes = {
   updated_at: Date
 }
 
-export async function mapAddAdkunReq(req: AddUserReq): Promise<AddUserInput> {
+export async function mapAddUserReq(req: AddUserReq): Promise<AddUserInput> {
   const password = await new Bcrypt().hash(req.password);
   return {
     id: uuid(),
