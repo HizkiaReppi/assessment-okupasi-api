@@ -7,7 +7,7 @@ export const authorizationMiddleware = (roles: string[]) => {
       res: Response,
       next: NextFunction,
   ) => {
-    if (!roles.includes(res.locals.access.role)) {
+    if (!res.locals.access.is_super) {
       next(new AuthorizationError());
     }
 
