@@ -25,3 +25,11 @@ model User {
 
   @@map("user")
 }
+
+model Authentication {
+  token String @id @db.VarChar(300)
+  expires_at DateTime
+  is_used Boolean @default(false)
+
+  @@map("authentication")
+}
