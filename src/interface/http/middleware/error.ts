@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {ResponseError} from '../../../common/error/response-error';
+import {ResponseError} from '../../../common/error/ResponseError';
 import {ZodError} from 'zod';
 
 export const errorMiddleware = async (
