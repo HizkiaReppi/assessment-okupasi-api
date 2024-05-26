@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "start": "node dist/app.js",
-    "dev": "tsc && node dist/app.js",
+    "dev": "ts-node src/app.ts",
     "test": "dotenv -e .env.test -- jest",
     "test:watch": "dotenv -e .env.test -- jest --watchAll --coverage",
     "test:watch:change": "dotenv -e .env.test -- jest --watch --coverage",
@@ -37,6 +37,7 @@
     "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
     "prisma": "^5.10.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.4.2"
   }
 }
