@@ -76,7 +76,7 @@ export class UserRepositoryImpl implements UserRepository {
         data: {deleted_at: new Date()},
       });
     } catch {
-      throw new InternalServerError('failed delete akun');
+      throw new InternalServerError('failed delete user');
     }
   }
 
