@@ -2,7 +2,7 @@ import {UserRepository} from '../../../domain/user/UserRepository';
 import {UserValidation} from '../../validation/UserValidation';
 import {Validation} from '../../validation/Validation';
 
-export class DeleteUserById {
+export class DeleteUserByIdUsecase {
   constructor(private readonly userRepo: UserRepository) {}
 
   async execute(id: string) {
