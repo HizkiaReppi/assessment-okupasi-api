@@ -9,12 +9,13 @@ import {userRouter} from '../../interface/http/api/user/router';
 export const initServer = () => {
   const app = express();
 
-  app.get('/api/v1', function(req, res) {
+  app.get('', function(req, res) {
     res.status(200).json({message: 'Welcome to Assessment Okupasi API'});
   });
 
   app.use(bodyParser.json(), cookieParser());
   app.use(
+      '/api/v1',
       authenticationRouter(),
       userRouter(),
   );
