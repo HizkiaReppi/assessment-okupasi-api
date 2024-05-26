@@ -11,7 +11,11 @@
     "test:watch": "dotenv -e .env.test -- jest --watchAll --coverage",
     "test:watch:change": "dotenv -e .env.test -- jest --watch --coverage",
     "migrate": "prisma migrate deploy",
-    "migrate:test": "dotenv -e .env.test -- prisma migrate deploy"
+    "migrate:test": "dotenv -e .env.test -- prisma migrate deploy",
+    "seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "ts-node ./prisma/seed.ts"
   },
   "author": "Adhicitta Masran",
   "license": "ISC",
