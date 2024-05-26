@@ -10,11 +10,11 @@ async function main() {
       "user" (id, is_super, nama, email, password, updated_at)
     VALUES
       (
-        '${uuid()}',
+        ${uuid()},
         true,
         'SUPER',
         'super@gmail.com',
-        '$2a$12$6ttmUEf4WDLGnUTsA6wmeus6jGwXUO8rKoToA5u1n9z7aE2Iymes4Ia',
+        '$2a$12$XH3qEeFA0Mi7..C.2IIWa.8epPmbBU7cusC8rOtvOHTT/HIF35xvK',
         ${new Date()}
       );
   `;
