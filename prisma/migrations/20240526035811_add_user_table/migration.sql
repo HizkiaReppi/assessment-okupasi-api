@@ -1,7 +1,7 @@
 -- CreateTable
 CREATE TABLE "user" (
     "id" TEXT NOT NULL,
-    "is_super" BOOLEAN NOT NULL,
+    "is_super" BOOLEAN NOT NULL DEFAULT false,
     "nama" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" VARCHAR(255) NOT NULL,

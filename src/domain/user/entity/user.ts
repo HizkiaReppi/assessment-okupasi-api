@@ -5,7 +5,6 @@ export type AddUserReq = {
   nama: string
   email: string
   password: string
-  is_super: boolean
 }
 
 export type AddUserInput = {
@@ -13,7 +12,6 @@ export type AddUserInput = {
   nama: string
   email: string
   password: string
-  is_super: boolean
 }
 
 export type LoginReq = {
@@ -49,6 +47,5 @@ export async function mapAddUserReq(req: AddUserReq): Promise<AddUserInput> {
     nama: req.nama,
     email: req.email,
     password: password,
-    is_super: req.is_super,
   };
 }

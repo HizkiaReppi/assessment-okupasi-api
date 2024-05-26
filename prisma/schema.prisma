@@ -15,7 +15,7 @@ datasource db {
 
 model User {
   id String @id
-  is_super Boolean
+  is_super Boolean @default(false)
   nama String
   email String @unique
   password String @db.VarChar(255)
