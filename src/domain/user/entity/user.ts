@@ -23,6 +23,7 @@ export type LoginReq = {
 
 export type LoginOutput = {
   id: string
+  nama: string
   password: string
   is_super: boolean
 }

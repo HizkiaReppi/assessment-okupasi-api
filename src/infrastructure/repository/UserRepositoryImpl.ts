@@ -24,6 +24,7 @@ export class UserRepositoryImpl implements UserRepository {
       where: {email},
       select: {
         id: true,
+        nama: true,
         password: true,
         is_super: true,
       },
