@@ -10,10 +10,16 @@ import {ChangeEmailUsecase}
 import {ChangePasswordUsecase}
   from '../../../../application/usecase/user/ChangePasswordUsecase';
 import {AddUserUsecase} from '../../../../application/usecase/user/AddUsecase';
+import {GetAllUserUsecase}
+  from '../../../../application/usecase/user/GetAllUsecase';
+import {DeleteUserByIdUsecase}
+  from '../../../../application/usecase/user/DeleteByIdUsecase';
 
 export class UserHandler {
   constructor(
     private readonly addUserUsecase: AddUserUsecase,
+    private readonly getAllUserUsecase: GetAllUserUsecase,
+    private readonly deleteUserByIdUsecase: DeleteUserByIdUsecase,
     private readonly loginUsecase: LoginUsecase,
     private readonly logoutUsecase: LogoutUsecase,
     private readonly changeEmailUsecase: ChangeEmailUsecase,
@@ -27,6 +33,26 @@ export class UserHandler {
       await this.addUserUsecase.execute(req.body);
 
       res.status(201).json({status: 'success'});
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async getAll(req: Request, res: Response, next: NextFunction) {
+    try {
+      const data = await this.getAllUserUsecase.execute();
+
+      res.json({status: 'success', data});
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      await this.deleteUserByIdUsecase.execute(req.params.id);
+
+      res.json({status: 'success'});
     } catch (e) {
       next(e);
     }

@@ -21,6 +21,10 @@ import {ChangePasswordUsecase}
   from '../../../../application/usecase/user/ChangePasswordUsecase';
 import {AddUserUsecase} from '../../../../application/usecase/user/AddUsecase';
 import {grantSuperMiddleware} from '../../middleware/authorization';
+import {GetAllUserUsecase}
+  from '../../../../application/usecase/user/GetAllUsecase';
+import {DeleteUserByIdUsecase}
+  from '../../../../application/usecase/user/DeleteByIdUsecase';
 
 export function userRouter() {
   // eslint-disable-next-line new-cap
@@ -38,6 +42,8 @@ export function userRouter() {
       addAuthenticationUsecase,
   );
   const addUserUsecase = new AddUserUsecase(userRepo);
+  const getAllUserUsecase = new GetAllUserUsecase(userRepo);
+  const deleteUserByIdUsecase = new DeleteUserByIdUsecase(userRepo);
   const deleteAuthenticationUsecase =
     new DeleteAuthenticationUsecase(authenticationRepo);
   const logoutUsecase = new LogoutUsecase(deleteAuthenticationUsecase);
@@ -46,6 +52,8 @@ export function userRouter() {
 
   const handler = new UserHandler(
       addUserUsecase,
+      getAllUserUsecase,
+      deleteUserByIdUsecase,
       loginUsecase,
       logoutUsecase,
       changeEmailUsecase,
@@ -55,11 +63,22 @@ export function userRouter() {
   router.post('/user/login', handler.login);
 
   // route with login required
-  router.post(
-      '/user',
+  router.route('/user')
+      .post(
+          authenticationMiddleware,
+          grantSuperMiddleware,
+          handler.add,
+      )
+      .get(
+          authenticationMiddleware,
+          grantSuperMiddleware,
+          handler.getAll,
+      );
+  router.delete(
+      '/user/:id',
       authenticationMiddleware,
       grantSuperMiddleware,
-      handler.add,
+      handler.deleteById,
   );
   router.post('/user/logout', authenticationMiddleware, handler.logout);
   router.patch('/user/email', authenticationMiddleware, handler.changeEmail);
