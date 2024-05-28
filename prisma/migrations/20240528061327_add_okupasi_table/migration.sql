@@ -5,3 +5,5 @@ CREATE TABLE "okupasi" (
 
     CONSTRAINT "okupasi_pkey" PRIMARY KEY ("kode")
 );
+
+CREATE UNIQUE INDEX "okupasi_nama_key" ON "okupasi"("nama");
