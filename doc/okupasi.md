@@ -42,10 +42,24 @@ Response Body (Failed):
 Endpoint: GET /api/v1/okupasi\
 Login: required
 
+- key: search\
+  type: number\
+  required: false
+- key: limit\
+  type: number\
+  required: false
+- key: page\
+  type: number\
+  required: false
+
 Response Body (Success):
 ```json
 {
   "status": "success",
+  "limit": 10,
+  "total_page": 1,
+  "total_result": 1,
+  "page": 1,
   "data": [
     {
       "kode": "010000",
