@@ -37,6 +37,16 @@ model Authentication {
 model Okupasi {
   kode String @id
   nama String
+  unit_kompetensi KompetensiOkupasi[]
 
   @@map("okupasi")
+}
+
+model KompetensiOkupasi {
+  id String @id
+  kode_okupasi String
+  nama String
+  okupasi Okupasi @relation(fields: [kode_okupasi], references: [kode], onDelete: Cascade)
+
+  @@map("kompetensi_okupasi")
 }
