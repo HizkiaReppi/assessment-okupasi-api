@@ -33,3 +33,10 @@ model Authentication {
 
   @@map("authentication")
 }
+
+model Okupasi {
+  kode String @id
+  nama String
+
+  @@map("okupasi")
+}
