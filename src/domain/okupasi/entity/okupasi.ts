@@ -48,7 +48,7 @@ export function mapAddOkupasiReq(req: AddOkupasiReq): AddOkupasiInput {
   };
 }
 
-export function mapEditOkupasiReq(req: AddOkupasiReq): AddOkupasiInput {
+export function mapEditOkupasiReq(req: EditOkupasiReq): EditOkupasiInput {
   return {
     kode: req.kode,
     nama: req.nama,
