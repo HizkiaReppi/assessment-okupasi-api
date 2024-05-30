@@ -13,11 +13,11 @@ export class AddOkupasiUsecase {
   async execute(payload: AddOkupasiReq) {
     Validation.validate(OkupasiValidation.ADD, payload);
 
-    const id = await this.okupasiRepo.add(
+    const kode = await this.okupasiRepo.add(
         mapAddOkupasiReq(payload),
         mapAllUnitKompetensiReq(payload.unit_kompetensi),
     );
 
-    return {id};
+    return {kode};
   }
 }

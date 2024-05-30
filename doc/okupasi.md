@@ -23,7 +23,9 @@ Response Body (Success):
 ```json
 {
   "status": "success",
-  "kode": "010000",
+  "data": {
+    "kode": "010000"
+  }
 }
 ```
 
