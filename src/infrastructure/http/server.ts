@@ -5,6 +5,7 @@ import {errorMiddleware} from '../../interface/http/middleware/error';
 import {authenticationRouter}
   from '../../interface/http/api/authentication/router';
 import {userRouter} from '../../interface/http/api/user/router';
+import {okupasiRouter} from '../../interface/http/api/okupasi/router';
 
 export const initServer = () => {
   const app = express();
@@ -18,6 +19,7 @@ export const initServer = () => {
       '/api/v1',
       authenticationRouter(),
       userRouter(),
+      okupasiRouter(),
   );
   app.use(errorMiddleware);
 
