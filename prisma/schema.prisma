@@ -50,3 +50,11 @@ model KompetensiOkupasi {
 
   @@map("kompetensi_okupasi")
 }
+
+model Sekolah {
+  id String @id
+  nama String @unique
+  kota String
+
+  @@map("sekolah")
+}
