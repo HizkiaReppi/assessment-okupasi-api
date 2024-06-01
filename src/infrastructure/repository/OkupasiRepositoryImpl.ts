@@ -32,7 +32,10 @@ export class OkupasiRepositoryImpl implements OkupasiRepository {
 
   async getAll(req: GetAllOkupasiInput): Promise<[number, Okupasi[]]> {
     const where = {
-      nama: {contains: req.search},
+      nama: {
+        contains: req.search,
+        mode: 'insensitive' as 'insensitive',
+      },
     };
 
     return await Promise.all([

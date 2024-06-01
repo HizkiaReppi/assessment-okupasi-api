@@ -44,8 +44,9 @@ Response Body (Failed):
 Endpoint: GET /api/v1/okupasi\
 Login: required
 
+Query Param:
 - key: search\
-  type: number\
+  type: string\
   required: false
 - key: limit\
   type: number\
