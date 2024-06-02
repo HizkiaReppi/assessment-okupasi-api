@@ -47,6 +47,7 @@ model KompetensiOkupasi {
   kode_okupasi String
   nama String
   okupasi Okupasi @relation(fields: [kode_okupasi], references: [kode], onDelete: Cascade)
+  kompetensi_lulusan KompetensiLulusan[]
 
   @@map("kompetensi_okupasi")
 }
@@ -55,6 +56,17 @@ model Sekolah {
   id String @id
   nama String @unique
   kota String
+  kompetensi KompetensiLulusan[]
 
   @@map("sekolah")
+}
+
+model KompetensiLulusan {
+  id_sekolah String
+  sekolah Sekolah @relation(fields: [id_sekolah], references: [id], onDelete: Cascade)
+  id_kompetensi_okupasi String
+  kompetensi KompetensiOkupasi @relation(fields: [id_kompetensi_okupasi], references: [id], onDelete: Cascade)
+
+  @@id([id_sekolah, id_kompetensi_okupasi])
+  @@map("kompetensi_lulusan")
 }
