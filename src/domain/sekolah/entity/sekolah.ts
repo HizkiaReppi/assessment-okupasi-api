@@ -17,6 +17,20 @@ export type GetAllSekolahInput = {
   page: number
 }
 
+export type GetSekolahStatInput = {
+  search?: string
+  limit: number
+  page: number
+  kode_okupasi: string
+}
+
+export type GetSekolahStatOutput = {
+  id: string
+  nama: string
+  kota: string
+  kecocokan: string
+}
+
 export type EditSekolahReq = {
   id: string
   nama: string
