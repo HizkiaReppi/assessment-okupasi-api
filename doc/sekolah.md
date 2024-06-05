@@ -215,6 +215,10 @@ Response Body (Success):
 ```json
 {
   "status": "success",
+  "limit": 10,
+  "total_page": 1,
+  "total_result": 1,
+  "page": 1,
   "data": [
     {
       "kode": "010000",
