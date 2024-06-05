@@ -301,3 +301,47 @@ Response Body (Failed):
   ]
 }
 ```
+
+## Get All Sekolah Stat By Kode Okupasi
+Endpoint: GET /api/v1/sekolah/stat/okupasi/{kode}\
+
+Query Param:
+- key: search\
+  type: string\
+  required: false
+- key: limit\
+  type: number\
+  required: false
+- key: page\
+  type: number\
+  required: false
+
+Response Body (Success):
+```json
+{
+  "status": "success",
+  "limit": 10,
+  "total_page": 1,
+  "total_result": 1,
+  "page": 1,
+  "data": [
+    {
+      "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+      "nama": "EXAMPLE",
+      "kota": "EXAMPLE",
+      "kecocokan": "100%",
+    }
+  ]
+}
+```
+
+Response Body (Failed):
+```json
+{
+  "errors": [
+    {
+      "message": "Internal Server Error"
+    }
+  ]
+}
+```
