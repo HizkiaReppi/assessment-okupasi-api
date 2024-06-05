@@ -1,0 +1,55 @@
+import {KompetensiOkupasi} from '@prisma/client';
+
+export type KompetensiLulusanReq = {
+  kode: string
+  idSekolah: string
+  unit_kompetensi: {
+    id: string
+  }[]
+}
+
+export type KompetensiLulusanInput = {
+  id_sekolah: string
+  id_kompetensi_okupasi: string
+}
+
+export type GetAllKompetensiLulusanByKodeOkupasiInput = {
+  search?: string
+  limit: number
+  page: number
+  kode_okupasi: string
+}
+
+export type GetAllKompetensiLulusanByKodeOkupasiOutput = {
+  id: string
+  nama: string
+  kota: string
+  unit_kompetensi: KompetensiOkupasi[]
+}
+
+export type GetAllKompetensiLulusanByIdSekolahInput = {
+  search?: string
+  limit: number
+  page: number
+  id_sekolah: string
+}
+
+export type GetAllKompetensiLulusanByIdSekolahOutput = {
+  kode: string
+  nama: string
+  unit_kompetensi: {
+    id: string,
+    nama: string,
+  }[]
+}
+
+export function mapKompetensiLulusanReq(
+    req: KompetensiLulusanReq,
+): KompetensiLulusanInput[] {
+  return req.unit_kompetensi.map((v) => {
+    return {
+      id_sekolah: req.idSekolah,
+      id_kompetensi_okupasi: v.id,
+    };
+  });
+}
