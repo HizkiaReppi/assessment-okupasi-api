@@ -170,7 +170,7 @@ Request Body:
 ```json
 {
   "kode": "010000",
-  "kompetensi": [
+  "unit_kompetensi": [
     {
       "id": "e6314752-c753-47dc-bc82-eae480d1b094"
     }
@@ -223,7 +223,7 @@ Response Body (Success):
     {
       "kode": "010000",
       "nama": "example",
-      "kompetensi": [
+      "unit_kompetensi": [
         {
           "id": "e6314752-c753-47dc-bc82-eae480d1b094",
           "nama": "example"
@@ -255,7 +255,7 @@ Request Body:
 ```json
 {
   "kode": "010000",
-  "kompetensi": [
+  "unit_kompetensi": [
     {
       "id": "e6314752-c753-47dc-bc82-eae480d1b094"
     },
