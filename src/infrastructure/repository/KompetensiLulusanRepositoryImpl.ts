@@ -16,8 +16,8 @@ import {countOffset} from '../../util/pagination';
 export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanRepository {
   constructor(private readonly db: PrismaClient) {}
 
-  async add(data: KompetensiLulusanInput): Promise<void> {
-    await this.db.kompetensiLulusan.create({data});
+  async add(data: KompetensiLulusanInput[]): Promise<void> {
+    await this.db.kompetensiLulusan.createMany({data});
   }
 
   async getAllByKodeOkupasi(

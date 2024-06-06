@@ -7,7 +7,7 @@ import {
 } from './entity/kompetensi-lulusan';
 
 export interface KompetensiLulusanRepository {
-  add(data: KompetensiLulusanInput): Promise<void>
+  add(data: KompetensiLulusanInput[]): Promise<void>
   getAllByKodeOkupasi(
     req: GetAllKompetensiLulusanByKodeOkupasiInput,
 ): Promise<[number, GetAllKompetensiLulusanByKodeOkupasiOutput[]]>
