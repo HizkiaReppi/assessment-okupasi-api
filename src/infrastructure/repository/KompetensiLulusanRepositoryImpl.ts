@@ -141,4 +141,15 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
       throw new NotFoundError('unit kompetensi tidak ditemukan');
     }
   }
+
+  async countByKode(idSekolah: string, kode: string): Promise<number> {
+    return await this.db.kompetensiLulusan.count({
+      where: {
+        id_sekolah: idSekolah,
+        kompetensi: {
+          kode_okupasi: kode,
+        },
+      },
+    });
+  }
 }

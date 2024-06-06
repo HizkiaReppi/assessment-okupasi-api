@@ -17,4 +17,5 @@ export interface KompetensiLulusanRepository {
   delete(req: KompetensiLulusanInput): Promise<void>
   deleteByKodeOkupasi(idSekolah: string, kode: string): Promise<void>
   verify(req: KompetensiLulusanInput): Promise<void>
+  countByKode(idSekolah: string, kode: string): Promise<number>
 }
