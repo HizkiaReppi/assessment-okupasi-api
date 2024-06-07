@@ -1,8 +1,8 @@
 import {KompetensiOkupasi} from '@prisma/client';
 
 export type KompetensiLulusanReq = {
+  id: string
   kode: string
-  idSekolah: string
   unit_kompetensi: {
     id: string
   }[]
@@ -48,7 +48,7 @@ export function mapKompetensiLulusanReq(
 ): KompetensiLulusanInput[] {
   return req.unit_kompetensi.map((v) => {
     return {
-      id_sekolah: req.idSekolah,
+      id_sekolah: req.id,
       id_kompetensi_okupasi: v.id,
     };
   });
