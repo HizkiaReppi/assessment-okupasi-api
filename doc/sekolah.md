@@ -284,6 +284,28 @@ Response Body (Failed):
 }
 ```
 
+## Delete Kompetensi By Kode Okupasi
+Endpoint: DELETE /api/v1/sekolah/{id}/okupasi/{kode}\
+Login: required
+
+Response Body (Success):
+```json
+{
+  "status": "success"
+}
+```
+
+Response Body (Failed):
+```json
+{
+  "errors": [
+    {
+      "message": "Internal Server Error"
+    }
+  ]
+}
+```
+
 ## Delete Kompetensi By Id
 Endpoint: DELETE /api/v1/sekolah/{id}/kompetensi/{idKompetensi}\
 Login: required
