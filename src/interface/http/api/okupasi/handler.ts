@@ -62,7 +62,7 @@ export class OkupasiHandler {
       };
       const data = await this.getAllOkupasiUsecase.execute(payload);
 
-      res.json({status: 'success', data});
+      res.json({status: 'success', ...data});
     } catch (e) {
       next(e);
     }
