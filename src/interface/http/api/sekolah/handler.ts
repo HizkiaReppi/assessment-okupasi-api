@@ -74,7 +74,7 @@ export class SekolahHandler {
       };
       const data = await this.getAllSekolahUsecase.execute(payload);
 
-      res.json({status: 'success', data});
+      res.json({status: 'success', ...data});
     } catch (e) {
       next(e);
     }
