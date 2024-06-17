@@ -42,7 +42,6 @@ Response Body (Failed):
 
 ## Get All Okupasi
 Endpoint: GET /api/v1/okupasi\
-Login: required
 
 Query Param:
 - key: search\
@@ -85,7 +84,6 @@ Response Body (Failed):
 
 ## Get Okupasi By Kode
 Endpoint: GET /api/v1/okupasi/{kode}\
-Login: required
 
 Response Body (Success):
 ```json
