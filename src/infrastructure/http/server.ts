@@ -7,6 +7,7 @@ import {authenticationRouter}
 import {userRouter} from '../../interface/http/api/user/router';
 import {okupasiRouter} from '../../interface/http/api/okupasi/router';
 import {sekolahRouter} from '../../interface/http/api/sekolah/router';
+import cors from 'cors';
 
 export const initServer = () => {
   const app = express();
@@ -15,6 +16,10 @@ export const initServer = () => {
     res.status(200).json({message: 'Welcome to Assessment Okupasi API'});
   });
 
+  app.use(cors({
+    origin: process.env.origin,
+    credentials: true,
+  }));
   app.use(bodyParser.json(), cookieParser());
   app.use(
       '/api/v1',
