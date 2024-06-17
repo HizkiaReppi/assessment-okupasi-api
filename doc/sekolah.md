@@ -37,7 +37,6 @@ Response Body (Failed):
 
 ## Get All Sekolah
 Endpoint: GET /api/v1/sekolah\
-Login: required
 
 Query Param:
 - key: search\
@@ -81,7 +80,6 @@ Response Body (Failed):
 
 ## Get Sekolah By Id
 Endpoint: GET /api/v1/sekolah/{id}\
-Login: required
 
 Response Body (Success):
 ```json
@@ -198,7 +196,6 @@ Response Body (Failed):
 
 ## Get All Kompetensi
 Endpoint: GET /api/v1/sekolah/{id}/kompetensi\
-Login: required
 
 Query Param:
 - key: search\
