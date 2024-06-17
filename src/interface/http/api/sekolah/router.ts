@@ -103,14 +103,14 @@ export function sekolahRouter() {
   // routes
   router.route('/sekolah')
       .post(authenticationMiddleware, handler.add)
-      .get(authenticationMiddleware, handler.getAll);
+      .get(handler.getAll);
   router.route('/sekolah/:id')
-      .get(authenticationMiddleware, handler.getById)
+      .get(handler.getById)
       .put(authenticationMiddleware, handler.editById)
       .delete(authenticationMiddleware, handler.deleteById);
   router.route('/sekolah/:id/kompetensi')
       .post(authenticationMiddleware, handler.addKompetensi)
-      .get(authenticationMiddleware, handler.getAllKompetensi)
+      .get(handler.getAllKompetensi)
       .put(authenticationMiddleware, handler.editKompetensi);
   router.delete(
       '/sekolah/:id/okupasi/:kode',
@@ -119,7 +119,6 @@ export function sekolahRouter() {
   );
   router.get(
       '/sekolah/stat/okupasi/:kode',
-      authenticationMiddleware,
       handler.getStatByKodeOkupasi,
   );
 
