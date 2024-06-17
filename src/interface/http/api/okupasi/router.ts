@@ -66,9 +66,9 @@ export function okupasiRouter() {
   // routes
   router.route('/okupasi')
       .post(authenticationMiddleware, handler.add)
-      .get(authenticationMiddleware, handler.getAll);
+      .get(handler.getAll);
   router.route('/okupasi/:kode')
-      .get(authenticationMiddleware, handler.getByKode)
+      .get(handler.getByKode)
       .put(authenticationMiddleware, handler.editByKode)
       .delete(authenticationMiddleware, handler.deleteByKode);
   router.post(
