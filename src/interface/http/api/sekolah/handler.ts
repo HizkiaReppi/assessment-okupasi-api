@@ -186,7 +186,7 @@ export class SekolahHandler {
     try {
       const payload: KompetensiLulusanInput = {
         id_sekolah: req.params.id,
-        id_kompetensi_okupasi: req.body.idKompetensi,
+        id_kompetensi_okupasi: req.body.idUnit,
       };
       await this.deleteKompetensiLulusanByIdUsecase.execute(payload);
 
