@@ -282,7 +282,7 @@ Response Body (Failed):
 ```
 
 ## Delete Kompetensi By Kode Okupasi
-Endpoint: DELETE /api/v1/sekolah/{id}/okupasi/{kode}\
+Endpoint: DELETE /api/v1/sekolah/{id}/kompetensi/okupasi/{kode}\
 Login: required
 
 Response Body (Success):
@@ -304,7 +304,7 @@ Response Body (Failed):
 ```
 
 ## Delete Kompetensi By Id
-Endpoint: DELETE /api/v1/sekolah/{id}/kompetensi/{idKompetensi}\
+Endpoint: DELETE /api/v1/sekolah/{id}/kompetensi/unit/{idUnit}\
 Login: required
 
 Response Body (Success):

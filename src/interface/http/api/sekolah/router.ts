@@ -113,7 +113,12 @@ export function sekolahRouter() {
       .get(handler.getAllKompetensi)
       .put(authenticationMiddleware, handler.editKompetensi);
   router.delete(
-      '/sekolah/:id/okupasi/:kode',
+      '/sekolah/:id/kompetensi/okupasi/:kode',
+      authenticationMiddleware,
+      handler.deleteKompetensiByKode,
+  );
+  router.delete(
+      '/sekolah/:id/kompetensi/unit/:idUnit',
       authenticationMiddleware,
       handler.deleteKompetensiByKode,
   );
