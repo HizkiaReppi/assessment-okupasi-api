@@ -36,15 +36,15 @@ export class AddKompetensiLulusanUsecase {
     }
 
     // verify each of unit kompetensi
-    payload.unit_kompetensi.forEach(async (v) => {
+    for (const unit of payload.unit_kompetensi) {
+      const unitId = unit.id;
       const verifyKompetensiInput: VerifyKompetensiInput = {
-        id: v.id,
+        id: unitId,
         kode_okupasi: payload.kode,
       };
 
       await this.kompetensiOkupasiRepo.verify(verifyKompetensiInput);
-    });
-
+    }
     await this.kompetensiLulusanRepo.add(mapKompetensiLulusanReq(payload));
   }
 }
