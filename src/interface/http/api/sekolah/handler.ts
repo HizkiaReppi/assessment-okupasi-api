@@ -205,9 +205,9 @@ export class SekolahHandler {
         page: parseInt(page as string),
         kode_okupasi: req.params.kode,
       };
-      await this.getSekolahStatByKodeUsecase.execute(payload);
+      const data = await this.getSekolahStatByKodeUsecase.execute(payload);
 
-      res.json({status: 'success'});
+      res.json({status: 'success', ...data});
     } catch (e) {
       next(e);
     }
