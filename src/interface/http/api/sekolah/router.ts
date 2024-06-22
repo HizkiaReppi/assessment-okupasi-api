@@ -120,7 +120,7 @@ export function sekolahRouter() {
   router.delete(
       '/sekolah/:id/kompetensi/unit/:idUnit',
       authenticationMiddleware,
-      handler.deleteKompetensiByKode,
+      handler.deleteKompetensiById,
   );
   router.get(
       '/sekolah/stat/okupasi/:kode',
