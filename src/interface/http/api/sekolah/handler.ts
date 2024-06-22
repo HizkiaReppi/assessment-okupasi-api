@@ -184,9 +184,10 @@ export class SekolahHandler {
 
   async deleteKompetensiById(req: Request, res: Response, next: NextFunction) {
     try {
+      const {id, idUnit} = req.params;
       const payload: KompetensiLulusanInput = {
-        id_sekolah: req.params.id,
-        id_kompetensi_okupasi: req.body.idUnit,
+        id_sekolah: id,
+        id_kompetensi_okupasi: idUnit,
       };
       await this.deleteKompetensiLulusanByIdUsecase.execute(payload);
 
