@@ -1,6 +1,6 @@
 import {KompetensiLulusanRepository}
   from '../../../domain/kompetensi_lulusan/KompetensiLulusanRepository';
-import {KompetensiLulusanInput}
+import {DeleteKompetensiLulusanReq, mapDeleteKompetensiLulusanReq}
   from '../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
 import {KompetensiLulusanValidation}
   from '../../validation/KompetensiLulusanValidation';
@@ -11,10 +11,11 @@ export class DeleteKompetensiLulusanByIdUsecase {
     private readonly kompetensiLulusanRepo: KompetensiLulusanRepository,
   ) {}
 
-  async execute(payload: KompetensiLulusanInput) {
+  async execute(payload: DeleteKompetensiLulusanReq) {
     Validation.validate(KompetensiLulusanValidation.DELETE_BY_ID, payload);
 
-    await this.kompetensiLulusanRepo.verify(payload);
-    await this.kompetensiLulusanRepo.delete(payload);
+    const input = mapDeleteKompetensiLulusanReq(payload);
+    await this.kompetensiLulusanRepo.verify(input);
+    await this.kompetensiLulusanRepo.delete(input);
   }
 }

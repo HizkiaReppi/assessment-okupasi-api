@@ -28,8 +28,8 @@ import {
   GetSekolahStatInput,
 } from '../../../../domain/sekolah/entity/sekolah';
 import {
+  DeleteKompetensiLulusanReq,
   GetAllKompetensiLulusanByIdSekolahInput,
-  KompetensiLulusanInput,
   KompetensiLulusanReq,
 } from '../../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
 
@@ -185,9 +185,9 @@ export class SekolahHandler {
   async deleteKompetensiById(req: Request, res: Response, next: NextFunction) {
     try {
       const {id, idUnit} = req.params;
-      const payload: KompetensiLulusanInput = {
-        id_sekolah: id,
-        id_kompetensi_okupasi: idUnit,
+      const payload: DeleteKompetensiLulusanReq = {
+        id,
+        idUnit,
       };
       await this.deleteKompetensiLulusanByIdUsecase.execute(payload);
 
