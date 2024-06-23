@@ -33,6 +33,7 @@ export type GetOkupasiByKodeOutput = {
 
 export type EditOkupasiReq = {
   kode: string
+  newKode: string
   nama: string
 }
 
@@ -50,7 +51,7 @@ export function mapAddOkupasiReq(req: AddOkupasiReq): AddOkupasiInput {
 
 export function mapEditOkupasiReq(req: EditOkupasiReq): EditOkupasiInput {
   return {
-    kode: req.kode,
+    kode: req.newKode,
     nama: req.nama,
   };
 }
