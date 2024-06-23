@@ -16,7 +16,8 @@ export class OkupasiValidation {
       .regex(/^[0-9]+$/, 'kode harus berupa angka');
 
   static readonly EDIT_BY_KODE = z.object({
-    kode: z.string().regex(/^[0-9]+$/, 'kode harus berupa angka'),
+    kode: z.string().regex(/^[0-9]+$/, 'parameter kode harus berupa angka'),
+    newKode: z.string().regex(/^[0-9]+$/, 'kode harus berupa angka'),
     nama: z.string(),
   });
 

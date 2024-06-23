@@ -82,6 +82,7 @@ export class OkupasiHandler {
     try {
       const payload: EditOkupasiReq = {
         kode: req.params.kode,
+        newKode: req.body.kode,
         nama: req.body.nama,
       };
 
