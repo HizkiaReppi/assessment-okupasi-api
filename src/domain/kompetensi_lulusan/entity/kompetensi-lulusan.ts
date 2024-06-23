@@ -8,6 +8,11 @@ export type KompetensiLulusanReq = {
   }[]
 }
 
+export type DeleteKompetensiLulusanReq = {
+  id: string
+  idUnit: string
+}
+
 export type KompetensiLulusanInput = {
   id_sekolah: string
   id_kompetensi_okupasi: string
@@ -52,4 +57,13 @@ export function mapKompetensiLulusanReq(
       id_kompetensi_okupasi: v.id,
     };
   });
+}
+
+export function mapDeleteKompetensiLulusanReq(
+    req: DeleteKompetensiLulusanReq,
+): KompetensiLulusanInput {
+  return {
+    id_sekolah: req.id,
+    id_kompetensi_okupasi: req.idUnit,
+  };
 }

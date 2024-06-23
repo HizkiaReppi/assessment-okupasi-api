@@ -27,7 +27,7 @@ export class KompetensiLulusanValidation {
 
   static readonly DELETE_BY_ID: ZodType = z.object({
     id: z.string().uuid(),
-    id_kompetensi_okupasi: z.string().uuid(),
+    idUnit: z.string().uuid(),
   });
 
   static readonly DELETE_BY_KODE: ZodType = z.object({
