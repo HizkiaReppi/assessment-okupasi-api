@@ -45,14 +45,14 @@ export type EditOkupasiInput = {
 export function mapAddOkupasiReq(req: AddOkupasiReq): AddOkupasiInput {
   return {
     kode: req.kode,
-    nama: req.nama,
+    nama: req.nama.toUpperCase(),
   };
 }
 
 export function mapEditOkupasiReq(req: EditOkupasiReq): EditOkupasiInput {
   return {
     kode: req.newKode,
-    nama: req.nama,
+    nama: req.nama.toUpperCase(),
   };
 }
 
