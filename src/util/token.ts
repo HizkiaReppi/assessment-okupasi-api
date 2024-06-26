@@ -1,6 +1,5 @@
 import {AuthenticationError} from '../common/error/AuthenticationError';
 
-
 export function verifyAuthorizationCookie(auth?: any) {
   const errMessage = new AuthenticationError();
 
@@ -16,4 +15,18 @@ export function verifyAuthorizationCookie(auth?: any) {
   if (refreshBearer !== 'Bearer') throw errMessage;
 
   return {access: accessToken, refresh: refreshToken};
+}
+
+export function verifyRefreshCookie(auth?: any) {
+  const errMessage = new AuthenticationError();
+
+  if (!auth) throw errMessage;
+
+  const {refresh} = auth;
+  if (!refresh) throw errMessage;
+
+  const [refreshBearer, refreshToken] = refresh.split(' ');
+  if (refreshBearer !== 'Bearer') throw errMessage;
+
+  return {refresh: refreshToken};
 }

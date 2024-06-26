@@ -4,7 +4,7 @@ import {RefreshAuthenticationUsecase}
 import autoBind from 'auto-bind';
 import {Jwt} from '../../../../infrastructure/security/Jwt';
 import {JwtPayload} from 'jsonwebtoken';
-import {verifyAuthorizationCookie} from '../../../../util/token';
+import {verifyRefreshCookie} from '../../../../util/token';
 
 export class AuthenticationHandler {
   constructor(
@@ -15,8 +15,7 @@ export class AuthenticationHandler {
 
   async refresh(req: Request, res: Response, next: NextFunction) {
     try {
-      const {refresh} = verifyAuthorizationCookie({
-        access: req.cookies.Authorization,
+      const {refresh} = verifyRefreshCookie({
         refresh: req.cookies.r,
       });
 
