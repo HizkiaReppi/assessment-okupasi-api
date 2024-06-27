@@ -1,4 +1,3 @@
-import {KompetensiOkupasi} from '@prisma/client';
 import {KompetensiLulusanRepository}
   from '../../../domain/kompetensi_lulusan/KompetensiLulusanRepository';
 import {
@@ -48,14 +47,26 @@ export class GetSekolahStatUsecase {
         .getAllByKodeOkupasi(sekolahPayload);
 
     const data: GetSekolahStatOutput[] = sekolah.map((sekolah) => {
+      const kompetensiSekolah = this.findKompetensiSekolah(
+          sekolah.id,
+          sekolahWithKompetensi[1],
+      );
+      const kompetensiSekolahLen =
+        kompetensiSekolah ? kompetensiSekolah.length : 0;
+
       return {
         id: sekolah.id,
         nama: sekolah.nama,
         kota: sekolah.kota,
         kecocokan: this.calculateKecocokan(
-            this.findKompetensiSekolah(sekolah.id, sekolahWithKompetensi[1]),
+            kompetensiSekolahLen,
             okupasi.unit_kompetensi.length,
         ),
+        okupasi: {
+          kode: okupasi.kode,
+          nama: okupasi.nama,
+          unit_kompetensi: kompetensiSekolah ? kompetensiSekolah : [],
+        },
       };
     });
 
@@ -68,7 +79,12 @@ export class GetSekolahStatUsecase {
   ) {
     for (let i = 0; i < data.length; i++) {
       if (data[i].id === id) {
-        const res = data[i].unit_kompetensi;
+        const res = data[i].unit_kompetensi.map((unit) => {
+          return {
+            id: unit.id,
+            nama: unit.nama,
+          };
+        });
         // remove the used element array
         // to minimize the next loops
         data.splice(i, 1);
@@ -79,11 +95,10 @@ export class GetSekolahStatUsecase {
   }
 
   private calculateKecocokan(
-      data: KompetensiOkupasi[] | undefined,
+      kompetensiSekolahLen: number,
       kompetensiOkupasiLen: number,
   ): string {
-    const kompetensiLen = data ? data.length : 0;
-    const percentage = (kompetensiLen / kompetensiOkupasiLen) * 100;
+    const percentage = (kompetensiSekolahLen / kompetensiOkupasiLen) * 100;
 
     return percentage.toString() + '%';
   }
