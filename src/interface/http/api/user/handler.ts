@@ -81,7 +81,10 @@ export class UserHandler {
                 sameSite: 'strict',
                 maxAge: refreshPayload.exp,
               },
-          ).json({status: 'success'});
+          ).json({
+            status: 'success',
+            data: {token: data.access},
+          });
     } catch (e) {
       next(e);
     }
@@ -103,7 +106,7 @@ export class UserHandler {
       const {id, email} = res.locals.access;
       const newEmail = req.body.email;
       if (newEmail === email) {
-        res.json({status: 'success'});
+        res.json({status: 'success', data: res.locals.access});
       } else {
         await this.changeEmailUsecase.execute({id, email: newEmail});
 
@@ -134,7 +137,10 @@ export class UserHandler {
               sameSite: 'strict',
               maxAge: refreshPayload.exp,
             },
-        ).json({status: 'success'});
+        ).json({
+          status: 'success',
+          data: {token: accessToken},
+        });
       }
     } catch (e) {
       next(e);
