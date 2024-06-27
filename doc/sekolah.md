@@ -353,6 +353,16 @@ Response Body (Success):
       "nama": "EXAMPLE",
       "kota": "EXAMPLE",
       "kecocokan": "100%",
+      "okupasi": {
+        "kode": "1238901",
+        "nama": "EXAMPLE",
+        "unit_kompetensi": [
+          {
+            "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+            "nama": "EXAMPLE 1"
+          }
+        ]
+      }
     }
   ]
 }

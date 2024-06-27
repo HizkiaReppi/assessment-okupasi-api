@@ -29,6 +29,14 @@ export type GetSekolahStatOutput = {
   nama: string
   kota: string
   kecocokan: string
+  okupasi: {
+    kode: string
+    nama: string
+    unit_kompetensi: {
+      id: string
+      nama: string
+    }[]
+  }
 }
 
 export type EditSekolahReq = {
