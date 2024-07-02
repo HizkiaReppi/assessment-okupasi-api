@@ -39,7 +39,10 @@ export class AuthenticationHandler {
             sameSite: 'strict',
             maxAge: refreshPayload.exp,
           },
-      ).json({status: 'success'});
+      ).json({
+        status: 'success',
+        data: {token: data.access},
+      });
     } catch (e) {
       next(e);
     }
