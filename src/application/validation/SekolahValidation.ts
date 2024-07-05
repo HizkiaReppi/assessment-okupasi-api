@@ -4,6 +4,8 @@ export class SekolahValidation {
   static readonly ADD: ZodType = z.object({
     nama: z.string(),
     kota: z.string(),
+    jumlah_siswa: z.number(),
+    jumlah_kelulusan: z.number(),
   });
 
   static readonly GET_BY_ID: ZodType = z.string().uuid();
@@ -12,6 +14,8 @@ export class SekolahValidation {
     id: z.string().uuid(),
     nama: z.string(),
     kota: z.string(),
+    jumlah_siswa: z.number(),
+    jumlah_kelulusan: z.number(),
   });
 
   static readonly DELETE_BY_ID: ZodType = z.string().uuid();

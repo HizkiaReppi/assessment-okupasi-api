@@ -10,7 +10,9 @@ Request Body:
 ```json
 {
   "nama": "example",
-  "kota": "example"
+  "kota": "example",
+  "jumlah_siswa": 100,
+  "jumlah_kelulusan": 90
 }
 ```
 
@@ -61,7 +63,10 @@ Response Body (Success):
     {
       "id": "e6314752-c753-47dc-bc82-eae480d1b094",
       "nama": "EXAMPLE",
-      "kota": "EXAMPLE"
+      "kota": "EXAMPLE",
+      "jumlah_siswa": 100,
+      "jumlah_kelulusan": 90,
+      "persentase_kelulusan": "90%"
     }
   ]
 }
@@ -88,7 +93,10 @@ Response Body (Success):
   "data": {
     "id": "e6314752-c753-47dc-bc82-eae480d1b094",
     "nama": "EXAMPLE",
-    "kota": "EXAMPLE"
+    "kota": "EXAMPLE",
+    "jumlah_siswa": 100,
+    "jumlah_kelulusan": 90,
+    "persentase_kelulusan": "90%"
   }
 }
 ```
@@ -114,7 +122,9 @@ Request Body:
 ```json
 {
     "nama": "EXAMPLE",
-    "kota": "EXAMPLE"
+    "kota": "EXAMPLE",
+    "jumlah_siswa": 100,
+    "jumlah_kelulusan": 90
 }
 ```
 
@@ -352,6 +362,9 @@ Response Body (Success):
       "id": "e6314752-c753-47dc-bc82-eae480d1b094",
       "nama": "EXAMPLE",
       "kota": "EXAMPLE",
+      "jumlah_siswa": 100,
+      "jumlah_kelulusan": 90,
+      "persentase_kelulusan": "90%",
       "kecocokan": "100%",
       "okupasi": {
         "kode": "1238901",
