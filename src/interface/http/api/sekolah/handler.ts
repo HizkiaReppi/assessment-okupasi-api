@@ -92,11 +92,16 @@ export class SekolahHandler {
 
   async editById(req: Request, res: Response, next: NextFunction) {
     try {
-      const {nama, kota} = req.body;
+      // eslint-disable-next-line camelcase
+      const {nama, kota, jumlah_siswa, jumlah_kelulusan} = req.body;
       const payload: EditSekolahReq = {
         id: req.params.id,
         nama,
         kota,
+        // eslint-disable-next-line camelcase
+        jumlah_siswa,
+        // eslint-disable-next-line camelcase
+        jumlah_kelulusan,
       };
       await this.editSekolahByIdUsecase.execute(payload);
 
