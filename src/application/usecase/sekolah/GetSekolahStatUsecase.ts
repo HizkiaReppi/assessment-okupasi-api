@@ -12,6 +12,7 @@ import {
 } from '../../../domain/sekolah/entity/sekolah';
 import {GetOkupasiByKodeUsecase} from '../okupasi/GetByKodeUsecase';
 import {Pagination} from '../../../util/pagination';
+import {calculatePercentage} from '../../../util/percentage';
 
 export class GetSekolahStatUsecase {
   constructor(
@@ -58,7 +59,7 @@ export class GetSekolahStatUsecase {
         id: sekolah.id,
         nama: sekolah.nama,
         kota: sekolah.kota,
-        kecocokan: this.calculateKecocokan(
+        kecocokan: calculatePercentage(
             kompetensiSekolahLen,
             okupasi.unit_kompetensi.length,
         ),
@@ -92,14 +93,5 @@ export class GetSekolahStatUsecase {
         return res;
       }
     }
-  }
-
-  private calculateKecocokan(
-      kompetensiSekolahLen: number,
-      kompetensiOkupasiLen: number,
-  ): string {
-    const percentage = (kompetensiSekolahLen / kompetensiOkupasiLen) * 100;
-
-    return percentage.toString() + '%';
   }
 }
