@@ -28,6 +28,12 @@
 
 ## About The Project
 
+Vocational schools contribute the largest number of unemployed in Indonesia. With that problem, this program exist.
+
+This project aims to help match vocational school graduates with the industry and help the industry find suitable candidates. It assesses the suitability of graduates competencies based on the curriculum with the industry.
+
+This project implements the REST method and applies a clean architecture structure. So, it can be applied and scaled up easily at any time.
+
 ## Getting Started
 
 ### Prerequisites
