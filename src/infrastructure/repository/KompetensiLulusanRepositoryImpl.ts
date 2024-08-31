@@ -84,7 +84,6 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
     const where = {
       nama: {
         contains: req.search,
-        mode: 'insensitive' as 'insensitive',
       },
       unit_kompetensi: {
         some: {
