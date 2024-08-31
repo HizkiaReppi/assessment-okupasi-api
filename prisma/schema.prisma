@@ -9,11 +9,11 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model User {
   id String @id
   is_super Boolean @default(false)
   nama String
@@ -23,7 +23,7 @@ model Users {
   updated_at DateTime @updatedAt
   deleted_at DateTime?
 
-  @@map("users")
+  @@map("user")
 }
 
 model Authentication {

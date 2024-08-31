@@ -7,7 +7,7 @@ async function main() {
   // insert super user
   await prisma.$executeRaw`
     INSERT INTO
-      users (id, is_super, nama, email, password, updated_at)
+      "user" (id, is_super, nama, email, password, updated_at)
     VALUES
       (
         ${uuid()},
