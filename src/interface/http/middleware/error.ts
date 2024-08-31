@@ -10,6 +10,7 @@ export const errorMiddleware = async (
   if (error) {
     let status: number;
     let message: any[];
+    console.log(error);
 
     if (error instanceof ResponseError) {
       status = error.status;
