@@ -34,7 +34,6 @@ export class OkupasiRepositoryImpl implements OkupasiRepository {
     const where = {
       nama: {
         contains: req.search,
-        mode: 'insensitive' as 'insensitive',
       },
     };
 
