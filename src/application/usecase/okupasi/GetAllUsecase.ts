@@ -6,6 +6,7 @@ export class GetAllOkupasiUsecase {
   constructor(private readonly okupasiRepo: OkupasiRepository) {}
 
   async execute(payload: GetAllOkupasiInput) {
+    payload.search = payload.search?.toUpperCase();
     payload.limit = payload.limit ? payload.limit : 10;
     payload.page = payload.page ? payload.page : 1;
 
