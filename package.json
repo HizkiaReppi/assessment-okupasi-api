@@ -12,7 +12,8 @@
     "test:watch:change": "dotenv -e .env.test -- jest --watch --coverage",
     "migrate": "prisma migrate deploy",
     "migrate:test": "dotenv -e .env.test -- prisma migrate deploy",
-    "seed": "prisma db seed"
+    "seed": "prisma db seed",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node ./prisma/seed.ts"
