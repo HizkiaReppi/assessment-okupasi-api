@@ -13,7 +13,7 @@
     "migrate": "prisma migrate deploy",
     "migrate:test": "dotenv -e .env.test -- prisma migrate deploy",
     "seed": "prisma db seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && prisma migrate deploy"
   },
   "prisma": {
     "seed": "ts-node ./prisma/seed.ts"
