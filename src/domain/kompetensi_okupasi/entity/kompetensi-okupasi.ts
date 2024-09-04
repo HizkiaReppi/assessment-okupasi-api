@@ -31,6 +31,11 @@ export type VerifyKompetensiInput = {
   kode_okupasi: string
 }
 
+export type VerifyAllKompetensiInput = {
+  kode_okupasi: string
+  ids: string[]
+}
+
 export type VerifyKompetensiByKodeAndNamaInput = {
   kode_okupasi: string
   nama: string
