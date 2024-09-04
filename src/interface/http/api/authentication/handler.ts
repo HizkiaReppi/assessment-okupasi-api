@@ -28,16 +28,18 @@ export class AuthenticationHandler {
           data.access,
           {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none',
             maxAge: refreshPayload.exp,
+            secure: process.env.ENV === 'prod' ? true : false,
           },
       ).cookie(
           'r',
           data.refresh,
           {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none',
             maxAge: refreshPayload.exp,
+            secure: process.env.ENV === 'prod' ? true : false,
           },
       ).json({
         status: 'success',
