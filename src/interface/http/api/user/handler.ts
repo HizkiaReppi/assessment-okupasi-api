@@ -70,16 +70,18 @@ export class UserHandler {
               data.access,
               {
                 httpOnly: true,
-                sameSite: 'strict',
+                sameSite: 'none',
                 maxAge: refreshPayload.exp,
+                secure: process.env.ENV === 'prod' ? true : false,
               },
           ).cookie(
               'r',
               data.refresh,
               {
                 httpOnly: true,
-                sameSite: 'strict',
+                sameSite: 'none',
                 maxAge: refreshPayload.exp,
+                secure: process.env.ENV === 'prod' ? true : false,
               },
           ).json({
             status: 'success',
@@ -126,16 +128,18 @@ export class UserHandler {
             'Bearer ' + accessToken,
             {
               httpOnly: true,
-              sameSite: 'strict',
+              sameSite: 'none',
               maxAge: refreshPayload.exp,
+              secure: process.env.ENV === 'prod' ? true : false,
             },
         ).cookie(
             'r',
             'Bearer ' + refreshToken,
             {
               httpOnly: true,
-              sameSite: 'strict',
+              sameSite: 'none',
               maxAge: refreshPayload.exp,
+              secure: process.env.ENV === 'prod' ? true : false,
             },
         ).json({
           status: 'success',
