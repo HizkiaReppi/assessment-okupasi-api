@@ -68,6 +68,7 @@ export function sekolahRouter() {
   const editKompetensiLulusanByKodeUsecase = new EditKompetensiLulusanByKodeUsecase(
       kompetensiLulusanRepo,
       sekolahRepo,
+      okupasiRepo,
       kompetensiOkupasiRepo,
   );
   // eslint-disable-next-line max-len

@@ -7,7 +7,7 @@ import {
 } from '../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
 import {KompetensiOkupasiRepository}
   from '../../../domain/kompetensi_okupasi/KompetensiOkupasiRepository';
-import {VerifyKompetensiInput}
+import {VerifyAllKompetensiInput}
   from '../../../domain/kompetensi_okupasi/entity/kompetensi-okupasi';
 import {OkupasiRepository} from '../../../domain/okupasi/OkupasiRepository';
 import {SekolahRepository} from '../../../domain/sekolah/SekolahRepository';
@@ -35,16 +35,13 @@ export class AddKompetensiLulusanUsecase {
       throw new BadRequestError('okupasi sudah ditambahkan');
     }
 
-    // verify each of unit kompetensi
-    for (const unit of payload.unit_kompetensi) {
-      const unitId = unit.id;
-      const verifyKompetensiInput: VerifyKompetensiInput = {
-        id: unitId,
-        kode_okupasi: payload.kode,
-      };
+    // verify all unit kompetensi
+    const verifyAllKompetensiInput: VerifyAllKompetensiInput = {
+      kode_okupasi: payload.kode,
+      ids: payload.unit_kompetensi.map((unit) => unit.id),
+    };
+    await this.kompetensiOkupasiRepo.verifyAll(verifyAllKompetensiInput);
 
-      await this.kompetensiOkupasiRepo.verify(verifyKompetensiInput);
-    }
     await this.kompetensiLulusanRepo.add(mapKompetensiLulusanReq(payload));
   }
 }

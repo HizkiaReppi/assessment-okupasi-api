@@ -6,6 +6,7 @@ import {
   EditKompetensiOkupasiInput,
   VerifyKompetensiInput,
   VerifyKompetensiByKodeAndNamaInput,
+  VerifyAllKompetensiInput,
 } from '../../domain/kompetensi_okupasi/entity/kompetensi-okupasi';
 import {NotFoundError} from '../../common/error/NotFoundError';
 
@@ -31,6 +32,21 @@ export class KompetensiOkupasiRepositoryImpl implements KompetensiOkupasiReposit
     const res = await this.db.kompetensiOkupasi.count({where: req});
     if (!res) {
       throw new NotFoundError('okupasi atau kompetensi tidak ditemukan');
+    }
+  }
+
+  async verifyAll(req: VerifyAllKompetensiInput): Promise<void> {
+    const res = await this.db.kompetensiOkupasi.count({
+      where: {
+        id: {
+          in: req.ids,
+        },
+        kode_okupasi: req.kode_okupasi,
+      },
+    });
+
+    if (res != req.ids.length) {
+      throw new NotFoundError('beberapa kompetensi tidak ditemukan');
     }
   }
 
