@@ -3,16 +3,16 @@ import {v4 as uuid} from 'uuid';
 export type AddSekolahReq = {
   nama: string
   kota: string
-  jumlah_siswa: number
-  jumlah_kelulusan: number
+  jumlah_siswa?: number
+  jumlah_kelulusan?: number
 }
 
 export type AddSekolahInput = {
   id: string
   nama: string
   kota: string
-  jumlah_siswa: number
-  jumlah_kelulusan: number
+  jumlah_siswa?: number
+  jumlah_kelulusan?: number
 }
 
 export type GetAllSekolahInput = {

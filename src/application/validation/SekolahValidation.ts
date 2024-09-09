@@ -5,11 +5,17 @@ export class SekolahValidation {
       .object({
         nama: z.string(),
         kota: z.string(),
-        jumlah_siswa: z.number(),
-        jumlah_kelulusan: z.number(),
+        jumlah_siswa: z.number().optional(),
+        jumlah_kelulusan: z.number().optional(),
       })
       .refine(
-          (schema) => schema.jumlah_kelulusan <= schema.jumlah_siswa,
+          (schema) => {
+            if (!schema.jumlah_siswa || !schema.jumlah_kelulusan) {
+              return true;
+            }
+
+            return schema.jumlah_kelulusan <= schema.jumlah_siswa;
+          },
           'jumlah kelulusan tidak boleh melebihi jumlah siswa',
       );
 
@@ -24,7 +30,13 @@ export class SekolahValidation {
         jumlah_kelulusan: z.number(),
       })
       .refine(
-          (schema) => schema.jumlah_kelulusan <= schema.jumlah_siswa,
+          (schema) => {
+            if (!schema.jumlah_siswa || !schema.jumlah_kelulusan) {
+              return true;
+            }
+
+            return schema.jumlah_kelulusan <= schema.jumlah_siswa;
+          },
           'jumlah kelulusan tidak boleh melebihi jumlah siswa',
       );
 
