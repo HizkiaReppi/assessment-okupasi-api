@@ -56,8 +56,8 @@ model Sekolah {
   id String @id
   nama String @unique
   kota String
-  jumlah_siswa Int
-  jumlah_kelulusan Int
+  jumlah_siswa Int @default(0)
+  jumlah_kelulusan Int @default(0)
   kompetensi KompetensiLulusan[]
 
   @@map("sekolah")
