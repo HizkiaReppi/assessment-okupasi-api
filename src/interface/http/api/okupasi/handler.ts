@@ -108,7 +108,9 @@ export class OkupasiHandler {
     try {
       const payload: AddKompetensiOkupasiReq = {
         kode_okupasi: req.params.kode,
+        kode_unit: req.body.kode_unit,
         nama: req.body.nama,
+        standard_kompetensi: req.body.standard_kompetensi,
       };
 
       await this.addKompetensiOkupasiUsecase.execute(payload);
@@ -125,7 +127,9 @@ export class OkupasiHandler {
       const payload: EditKompetensiOkupasiReq = {
         id,
         kode_okupasi: kode,
+        kode_unit: req.body.kode_unit,
         nama: req.body.nama,
+        standard_kompetensi: req.body.standard_kompetensi,
       };
 
       await this.editKompetensiOkupasiByIdUsecase.execute(payload);

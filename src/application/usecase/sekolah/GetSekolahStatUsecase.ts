@@ -89,7 +89,9 @@ export class GetSekolahStatUsecase {
         const res = data[i].unit_kompetensi.map((unit) => {
           return {
             id: unit.id,
+            kode_unit: unit.kode_unit,
             nama: unit.nama,
+            standard_kompetensi: unit.standard_kompetensi,
           };
         });
         // remove the used element array

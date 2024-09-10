@@ -13,7 +13,9 @@ Request Body:
   "nama": "example",
   "unit_kompetensi": [
     {
-      "nama": "example"
+      "kode_unit": "k213.213",
+      "nama": "example",
+      "standard_kompetensi": "example"
     }
   ]
 }
@@ -95,7 +97,9 @@ Response Body (Success):
     "unit_kompetensi": [
       {
         "id": "e6314752-c753-47dc-bc82-eae480d1b094",
-        "nama": "example"
+        "kode_unit": "k213.213",
+        "nama": "example",
+        "standard_kompetensi": "example"
       }
     ]
   }
@@ -176,7 +180,9 @@ Request Type: application/json
 Request Body:
 ```json
 {
-  "nama": "example"
+  "kode_unit": "k213.213",
+  "nama": "example",
+  "standard_kompetensi": "example"
 }
 ```
 
@@ -207,7 +213,9 @@ Request Type: application/json
 Request Body:
 ```json
 {
-  "nama": "example"
+  "kode_unit": "k213.213",
+  "nama": "example",
+  "standard_kompetensi": "example"
 }
 ```
 

@@ -6,8 +6,9 @@ import {
 } from '../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
 import {KompetensiOkupasiRepository}
   from '../../../domain/kompetensi_okupasi/KompetensiOkupasiRepository';
-import {VerifyKompetensiInput}
+import {VerifyAllKompetensiInput}
   from '../../../domain/kompetensi_okupasi/entity/kompetensi-okupasi';
+import {OkupasiRepository} from '../../../domain/okupasi/OkupasiRepository';
 import {SekolahRepository} from '../../../domain/sekolah/SekolahRepository';
 import {prismaClient} from '../../../infrastructure/database/prisma';
 import {KompetensiLulusanValidation}
@@ -18,6 +19,7 @@ export class EditKompetensiLulusanByKodeUsecase {
   constructor(
     private readonly kompetensiLulusanRepo: KompetensiLulusanRepository,
     private readonly sekolahRepo: SekolahRepository,
+    private readonly okupasiRepo: OkupasiRepository,
     private readonly kompetensiOkupasiRepo: KompetensiOkupasiRepository,
   ) {}
 
@@ -25,16 +27,14 @@ export class EditKompetensiLulusanByKodeUsecase {
     Validation.validate(KompetensiLulusanValidation.EDIT, payload);
 
     await this.sekolahRepo.verify(payload.id);
+    await this.okupasiRepo.verify(payload.kode);
 
-    // verify each of unit kompetensi
-    payload.unit_kompetensi.forEach(async (v) => {
-      const verifyKompetensiInput: VerifyKompetensiInput = {
-        id: v.id,
-        kode_okupasi: payload.kode,
-      };
-
-      await this.kompetensiOkupasiRepo.verify(verifyKompetensiInput);
-    });
+    // verify all unit kompetensi
+    const verifyAllKompetensiInput: VerifyAllKompetensiInput = {
+      kode_okupasi: payload.kode,
+      ids: payload.unit_kompetensi.map((unit) => unit.id),
+    };
+    await this.kompetensiOkupasiRepo.verifyAll(verifyAllKompetensiInput);
 
     await prismaClient.$transaction(async (tx) => {
       await this.kompetensiLulusanRepo

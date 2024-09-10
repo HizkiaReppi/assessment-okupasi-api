@@ -6,7 +6,9 @@ export class OkupasiValidation {
     nama: z.string(),
     unit_kompetensi: z.array(
         z.object({
+          kode_unit: z.string().min(6),
           nama: z.string(),
+          standard_kompetensi: z.string().max(250).optional(),
         }),
     ),
   });

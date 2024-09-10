@@ -3,6 +3,7 @@ import {
   EditKompetensiOkupasiInput,
   VerifyKompetensiInput,
   VerifyKompetensiByKodeAndNamaInput,
+  VerifyAllKompetensiInput,
 } from './entity/kompetensi-okupasi';
 
 export interface KompetensiOkupasiRepository {
@@ -10,5 +11,6 @@ export interface KompetensiOkupasiRepository {
   editById(id: string, data: EditKompetensiOkupasiInput): Promise<void>
   deleteById(id: string): Promise<void>
   verify(req: VerifyKompetensiInput): Promise<void>
+  verifyAll(req: VerifyAllKompetensiInput): Promise<void>
   verifyByKodeAndNama(req: VerifyKompetensiByKodeAndNamaInput): Promise<void>
 }
