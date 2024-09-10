@@ -233,7 +233,9 @@ Response Body (Success):
       "unit_kompetensi": [
         {
           "id": "e6314752-c753-47dc-bc82-eae480d1b094",
-          "nama": "example"
+          "kode_unit": "k213.213",
+            "nama": "example 1",
+            "standard_kompetensi": "example"
         }
       ]
     }
@@ -372,7 +374,9 @@ Response Body (Success):
         "unit_kompetensi": [
           {
             "id": "e6314752-c753-47dc-bc82-eae480d1b094",
-            "nama": "EXAMPLE 1"
+            "kode_unit": "k213.213",
+            "nama": "EXAMPLE 1",
+            "standard_kompetensi": "example"
           }
         ]
       }
