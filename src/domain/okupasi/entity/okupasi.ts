@@ -3,7 +3,7 @@ import {v4 as uuid} from 'uuid';
 export type AddOkupasiReq = {
   kode: string
   nama: string
-  unit_kompetensi: {nama: string}[]
+  unit_kompetensi: UnitKompetensiReq[]
 }
 
 export type AddOkupasiInput = {
@@ -11,9 +11,17 @@ export type AddOkupasiInput = {
   nama: string
 }
 
+export type UnitKompetensiReq = {
+  kode_unit: string
+  nama: string
+  standard_kompetensi?: string
+}
+
 export type UnitKompetensiInput = {
   id: string
+  kode_unit: string
   nama: string
+  standard_kompetensi?: string
 }
 
 export type GetAllOkupasiInput = {
@@ -27,7 +35,9 @@ export type GetOkupasiByKodeOutput = {
   nama: string
   unit_kompetensi: {
     id: string
+    kode_unit: string
     nama: string
+    standard_kompetensi: string
   }[]
 }
 
@@ -57,12 +67,14 @@ export function mapEditOkupasiReq(req: EditOkupasiReq): EditOkupasiInput {
 }
 
 export function mapAllUnitKompetensiReq(
-    req: {nama: string}[],
+    req: UnitKompetensiReq[],
 ): UnitKompetensiInput[] {
   return req.map((kompetensi) => {
     return {
       id: uuid(),
+      kode_unit: kompetensi.kode_unit,
       nama: kompetensi.nama,
+      standard_kompetensi: kompetensi.standard_kompetensi,
     };
   });
 }

@@ -69,7 +69,9 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
           return {
             id: kompetensiOkupasi.id,
             kode_okupasi: kompetensiOkupasi.kode_okupasi,
+            kode_unit: kompetensiOkupasi.kode_unit,
             nama: kompetensiOkupasi.nama,
+            standard_kompetensi: kompetensiOkupasi.standard_kompetensi,
           };
         }),
       };
@@ -101,7 +103,9 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
           unit_kompetensi: {
             select: {
               id: true,
+              kode_unit: true,
               nama: true,
+              standard_kompetensi: true,
             },
             where: {
               kompetensi_lulusan: {

@@ -17,7 +17,9 @@ export class GetOkupasiByKodeUsecase {
       unit_kompetensi: data.unit_kompetensi.map((v) => {
         return {
           id: v.id,
+          kode_unit: v.kode_unit,
           nama: v.nama,
+          standard_kompetensi: v.standard_kompetensi,
         };
       }),
     };
