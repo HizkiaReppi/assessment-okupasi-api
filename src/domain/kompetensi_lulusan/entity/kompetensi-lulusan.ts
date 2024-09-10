@@ -43,8 +43,10 @@ export type GetAllKompetensiLulusanByIdSekolahOutput = {
   kode: string
   nama: string
   unit_kompetensi: {
-    id: string,
-    nama: string,
+    id: string
+    kode_unit: string
+    nama: string
+    standard_kompetensi: string
   }[]
 }
 
