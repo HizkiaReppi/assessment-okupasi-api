@@ -45,9 +45,9 @@ model Okupasi {
 model KompetensiOkupasi {
   id String @id
   kode_okupasi String
-  kode_unit String
+  kode_unit String?
   nama String
-  standard_kompetensi String @db.VarChar(250) @default("")
+  standard_kompetensi String? @db.VarChar(250) @default("")
   okupasi Okupasi @relation(fields: [kode_okupasi], references: [kode], onDelete: Cascade)
   kompetensi_lulusan KompetensiLulusan[]
 

@@ -5,5 +5,5 @@
 
 */
 -- AlterTable
-ALTER TABLE "kompetensi_okupasi" ADD COLUMN     "kode_unit" TEXT NOT NULL,
-ADD COLUMN     "standard_kompetensi" VARCHAR(250) NOT NULL DEFAULT '';
+ALTER TABLE "kompetensi_okupasi" ADD COLUMN "kode_unit" TEXT NULL,
+ADD COLUMN "standard_kompetensi" VARCHAR(250) NULL DEFAULT '';
