@@ -61,6 +61,7 @@ model Sekolah {
   jumlah_siswa Int @default(0)
   jumlah_kelulusan Int @default(0)
   kompetensi KompetensiLulusan[]
+  konsentrasi KonsentrasiSekolah[]
 
   @@map("sekolah")
 }
@@ -78,6 +79,18 @@ model KompetensiLulusan {
 model Konsentrasi {
   id String @id
   nama String @unique @db.VarChar(255)
+  konsentrasiSekolah KonsentrasiSekolah[]
 
   @@map("konsentrasi")
+}
+
+
+model KonsentrasiSekolah {
+  id_sekolah String
+  sekolah Sekolah @relation(fields: [id_sekolah], references: [id], onDelete: Cascade)
+  id_konsentrasi String
+  konsentrasi Konsentrasi @relation(fields: [id_konsentrasi], references: [id], onDelete: Cascade)
+
+  @@id([id_sekolah, id_konsentrasi])
+  @@map("konsentrasi_sekolah")
 }
