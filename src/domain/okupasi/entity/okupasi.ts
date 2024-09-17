@@ -35,9 +35,9 @@ export type GetOkupasiByKodeOutput = {
   nama: string
   unit_kompetensi: {
     id: string
-    kode_unit: string
+    kode_unit: string | null
     nama: string
-    standard_kompetensi: string
+    standard_kompetensi: string | null
   }[]
 }
 
