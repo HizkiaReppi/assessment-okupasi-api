@@ -96,7 +96,7 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
       },
     };
 
-    return await Promise.all([
+    const [totalResult, data] = await Promise.all([
       this.db.okupasi.count({where}),
       this.db.okupasi.findMany({
         include: {
@@ -121,6 +121,23 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
         take: req.limit,
       }),
     ]);
+
+    const res: GetAllKompetensiLulusanByIdSekolahOutput[] = data.map((v) => {
+      return {
+        kode: v.kode,
+        nama: v.nama,
+        unit_kompetensi: v.unit_kompetensi.map((kompetensi) => {
+          return {
+            id: kompetensi.id,
+            kode_unit: kompetensi.kode_unit as string,
+            nama: kompetensi.nama,
+            standard_kompetensi: kompetensi.standard_kompetensi as string,
+          };
+        }),
+      };
+    });
+
+    return [totalResult, res];
   }
 
   async delete(req: KompetensiLulusanInput): Promise<void> {
