@@ -74,3 +74,10 @@ model KompetensiLulusan {
   @@id([id_sekolah, id_kompetensi_okupasi])
   @@map("kompetensi_lulusan")
 }
+
+model Konsentrasi {
+  id String @id
+  nama String @unique @db.VarChar(255)
+
+  @@map("konsentrasi")
+}
