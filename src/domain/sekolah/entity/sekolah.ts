@@ -5,6 +5,7 @@ export type AddSekolahReq = {
   kota: string
   jumlah_siswa?: number
   jumlah_kelulusan?: number
+  konsentrasi: {id: string}[]
 }
 
 export type AddSekolahInput = {
@@ -19,6 +20,18 @@ export type GetAllSekolahInput = {
   search?: string
   limit: number
   page: number
+}
+
+export type GetSekolahOutput = {
+  id: string
+  nama: string
+  kota: string
+  jumlah_siswa: number
+  jumlah_kelulusan: number
+  konsentrasi: {
+    id: string
+    nama: string
+  }[]
 }
 
 export type GetSekolahStatInput = {

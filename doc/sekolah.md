@@ -12,7 +12,15 @@ Request Body:
   "nama": "example",
   "kota": "example",
   "jumlah_siswa": 100,
-  "jumlah_kelulusan": 90
+  "jumlah_kelulusan": 90,
+  "konsentrasi": [
+    {
+      "id": "e6314752-c753-47dc-bc82-eae480d1b094"
+    },
+    {
+      "id": "adf14752-c753-47dc-bc82-eae480d1b094"
+    }
+  ]
 }
 ```
 
@@ -66,7 +74,17 @@ Response Body (Success):
       "kota": "EXAMPLE",
       "jumlah_siswa": 100,
       "jumlah_kelulusan": 90,
-      "persentase_kelulusan": "90%"
+      "persentase_kelulusan": "90%",
+      "konsentrasi": [
+        {
+          "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+          "nama": "RPL"
+        },
+        {
+          "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+          "nama": "TKJ"
+        }
+      ]
     }
   ]
 }
@@ -96,7 +114,17 @@ Response Body (Success):
     "kota": "EXAMPLE",
     "jumlah_siswa": 100,
     "jumlah_kelulusan": 90,
-    "persentase_kelulusan": "90%"
+    "persentase_kelulusan": "90%",
+    "konsentrasi": [
+      {
+        "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+        "nama": "RPL"
+      },
+      {
+        "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+        "nama": "TKJ"
+      }
+    ]
   }
 }
 ```
@@ -318,6 +346,44 @@ Response Body (Failed):
 ## Delete Kompetensi By Id
 Endpoint: DELETE /api/v1/sekolah/{id}/kompetensi/unit/{idUnit}\
 Login: required
+
+Response Body (Success):
+```json
+{
+  "status": "success"
+}
+```
+
+Response Body (Failed):
+```json
+{
+  "errors": [
+    {
+      "message": "Internal Server Error"
+    }
+  ]
+}
+```
+
+## Edit Konsentrasi
+Endpoint: PUT /api/v1/sekolah/{id}/konsentrasi\
+Login: required
+
+Request Type: application/json
+
+Request Body:
+```json
+{
+  "konsentrasi": [
+    {
+      "id": "e6314752-c753-47dc-bc82-eae480d1b094"
+    },
+    {
+      "id": "e6314752-c753-47dc-bc82-eae480d1bcxc"
+    }
+  ]
+}
+```
 
 Response Body (Success):
 ```json

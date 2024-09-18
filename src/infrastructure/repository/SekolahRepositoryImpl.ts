@@ -1,9 +1,10 @@
-import {PrismaClient, Sekolah} from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 import {SekolahRepository} from '../../domain/sekolah/SekolahRepository';
 import {
   AddSekolahInput,
   GetAllSekolahInput,
   EditSekolahInput,
+  GetSekolahOutput,
 } from '../../domain/sekolah/entity/sekolah';
 import {countOffset} from '../../util/pagination';
 import {NotFoundError} from '../../common/error/NotFoundError';
@@ -17,30 +18,80 @@ export class SekolahRepositoryImpl implements SekolahRepository {
     return id;
   }
 
-  async getAll(req: GetAllSekolahInput): Promise<[number, Sekolah[]]> {
+  async getAll(req: GetAllSekolahInput): Promise<[number, GetSekolahOutput[]]> {
     const where = {
       nama: {
         contains: req.search,
       },
     };
 
-    return await Promise.all([
+    const [totalResult, data] = await Promise.all([
       this.db.sekolah.count({where}),
       this.db.sekolah.findMany({
+        include: {
+          konsentrasi: {
+            include: {
+              konsentrasi: true,
+            },
+          },
+        },
         where,
         skip: countOffset(req.page, req.limit),
         take: req.limit,
       }),
     ]);
+
+    const res: GetSekolahOutput[] = data.map((v) => {
+      return {
+        id: v.id,
+        nama: v.nama,
+        kota: v.kota,
+        jumlah_siswa: v.jumlah_siswa,
+        jumlah_kelulusan: v.jumlah_kelulusan,
+        konsentrasi: v.konsentrasi?.map((konsentrasi) => {
+          const konsentrasiSekolah = konsentrasi.konsentrasi;
+          return {
+            id: konsentrasiSekolah.id,
+            nama: konsentrasiSekolah.nama,
+          };
+        }),
+      };
+    });
+
+    return [totalResult, res];
   }
 
-  async getById(id: string): Promise<Sekolah> {
-    const data = await this.db.sekolah.findFirst({where: {id}});
+  async getById(id: string): Promise<GetSekolahOutput> {
+    const data = await this.db.sekolah.findFirst({
+      include: {
+        konsentrasi: {
+          include: {
+            konsentrasi: true,
+          },
+        },
+      },
+      where: {id},
+    });
     if (!data) {
       throw new NotFoundError('sekolah tidak ditemukan');
     }
 
-    return data;
+    const res: GetSekolahOutput = {
+      id: data.id,
+      nama: data.nama,
+      kota: data.kota,
+      jumlah_siswa: data.jumlah_siswa,
+      jumlah_kelulusan: data.jumlah_kelulusan,
+      konsentrasi: data.konsentrasi?.map((konsentrasi) => {
+        const konsentrasiSekolah = konsentrasi.konsentrasi;
+        return {
+          id: konsentrasiSekolah.id,
+          nama: konsentrasiSekolah.nama,
+        };
+      }),
+    };
+
+    return res;
   }
 
   async editById(id: string, data: EditSekolahInput): Promise<void> {

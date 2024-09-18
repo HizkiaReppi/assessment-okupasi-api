@@ -32,6 +32,10 @@ import {
   GetAllKompetensiLulusanByIdSekolahInput,
   KompetensiLulusanReq,
 } from '../../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
+// eslint-disable-next-line max-len
+import {EditKonsentrasiSekolahBySekolahIdUsecase} from '../../../../application/usecase/konsentrasi-sekolah/EditBySekolahIdUsecase';
+import {EditKonsentrasiSekolahReq}
+  from '../../../../domain/konsentrasi_sekolah/entity/konsentrasi-sekolah';
 
 export class SekolahHandler {
   constructor(
@@ -50,6 +54,8 @@ export class SekolahHandler {
     // eslint-disable-next-line max-len
     private readonly deleteKompetensiLulusanByIdUsecase: DeleteKompetensiLulusanByIdUsecase,
     private readonly getSekolahStatByKodeUsecase: GetSekolahStatUsecase,
+    // eslint-disable-next-line max-len
+    private readonly editKonsentrasiSekolahBySekolahIdUsecase: EditKonsentrasiSekolahBySekolahIdUsecase,
   ) {
     autoBind(this);
   }
@@ -195,6 +201,24 @@ export class SekolahHandler {
         idUnit,
       };
       await this.deleteKompetensiLulusanByIdUsecase.execute(payload);
+
+      res.json({status: 'success'});
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  async editKonsentrasiBySekolahId(
+      req: Request,
+      res: Response,
+      next: NextFunction,
+  ) {
+    try {
+      const payload: EditKonsentrasiSekolahReq = {
+        id: req.params.id,
+        konsentrasi: req.body.konsentrasi,
+      };
+      await this.editKonsentrasiSekolahBySekolahIdUsecase.execute(payload);
 
       res.json({status: 'success'});
     } catch (e) {

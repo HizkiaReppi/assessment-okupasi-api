@@ -34,6 +34,12 @@ import {GetSekolahStatUsecase}
   from '../../../../application/usecase/sekolah/GetSekolahStatUsecase';
 import {GetOkupasiByKodeUsecase}
   from '../../../../application/usecase/okupasi/GetByKodeUsecase';
+import {KonsentrasiRepositoryImpl}
+  from '../../../../infrastructure/repository/KonsentrasiRepositoryImpl';
+import {KonsentrasiSekolahRepositoryImpl}
+  from '../../../../infrastructure/repository/KonsentrasiSekolahRepositoryImpl';
+// eslint-disable-next-line max-len
+import {EditKonsentrasiSekolahBySekolahIdUsecase} from '../../../../application/usecase/konsentrasi-sekolah/EditBySekolahIdUsecase';
 
 export function sekolahRouter() {
   // eslint-disable-next-line new-cap
@@ -47,9 +53,16 @@ export function sekolahRouter() {
   const okupasiRepo = new OkupasiRepositoryImpl(prismaClient);
   const kompetensiOkupasiRepo =
     new KompetensiOkupasiRepositoryImpl(prismaClient);
+  const konsentrasiRepo = new KonsentrasiRepositoryImpl(prismaClient);
+  const konsentrasiSekolahRepo =
+    new KonsentrasiSekolahRepositoryImpl(prismaClient);
 
   // usecase
-  const addSekolahUsecase = new AddSekolahUsecase(sekolahRepo);
+  const addSekolahUsecase = new AddSekolahUsecase(
+      sekolahRepo,
+      konsentrasiRepo,
+      konsentrasiSekolahRepo,
+  );
   const getAllSekolahUsecase = new GetAllSekolahUsecase(sekolahRepo);
   const getSekolahByIdUsecase = new GetSekolahByIdUsecase(sekolahRepo);
   const editSekolahByIdUsecase = new EditSekolahByIdUsecase(sekolahRepo);
@@ -86,6 +99,12 @@ export function sekolahRouter() {
       okupasiRepo,
       getOkupasiByKodeUsecase,
   );
+  const editKonsentrasiSekolahBySekolahIdUsecase =
+    new EditKonsentrasiSekolahBySekolahIdUsecase(
+        konsentrasiSekolahRepo,
+        sekolahRepo,
+        konsentrasiRepo,
+    );
 
   const handler = new SekolahHandler(
       addSekolahUsecase,
@@ -99,6 +118,7 @@ export function sekolahRouter() {
       deleteKompetensiLulusanByKodeUsecase,
       deleteKompetensiLulusanByIdUsecase,
       getsekolahStatUsecase,
+      editKonsentrasiSekolahBySekolahIdUsecase,
   );
 
   // routes
@@ -122,6 +142,11 @@ export function sekolahRouter() {
       '/sekolah/:id/kompetensi/unit/:idUnit',
       authenticationMiddleware,
       handler.deleteKompetensiById,
+  );
+  router.put(
+      '/sekolah/:id/konsentrasi',
+      authenticationMiddleware,
+      handler.editKonsentrasiBySekolahId,
   );
   router.get(
       '/sekolah/stat/okupasi/:kode',

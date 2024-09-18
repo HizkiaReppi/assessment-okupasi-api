@@ -11,4 +11,5 @@ export interface KonsentrasiRepository {
   editById(id: string, data: EditKonsentrasiInput): Promise<void>
   deleteById(id: string): Promise<void>
   verify(id: string): Promise<void>
+  verifyAll(ids: string[]): Promise<void>
 }
