@@ -62,4 +62,18 @@ export class KonsentrasiRepositoryImpl implements KonsentrasiRepository {
       throw new NotFoundError('konsentrasi tidak ditemukan');
     }
   }
+
+  async verifyAll(ids: string[]): Promise<void> {
+    const res = await this.db.konsentrasi.count({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+    });
+
+    if (res != ids.length) {
+      throw new NotFoundError('beberapa konsentrasi tidak ditemukan');
+    }
+  }
 }
