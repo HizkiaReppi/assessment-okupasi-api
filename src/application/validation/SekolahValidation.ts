@@ -7,6 +7,11 @@ export class SekolahValidation {
         kota: z.string(),
         jumlah_siswa: z.number().optional(),
         jumlah_kelulusan: z.number().optional(),
+        konsentrasi: z.array(
+            z.object({
+              id: z.string().uuid(),
+            }),
+        ).optional(),
       })
       .refine(
           (schema) => {
