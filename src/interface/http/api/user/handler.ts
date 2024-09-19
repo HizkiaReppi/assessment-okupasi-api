@@ -14,6 +14,7 @@ import {GetAllUserUsecase}
   from '../../../../application/usecase/user/GetAllUsecase';
 import {DeleteUserByIdUsecase}
   from '../../../../application/usecase/user/DeleteByIdUsecase';
+import {createAuthCookieOpts} from '../../../../util/auth-cookie';
 
 export class UserHandler {
   constructor(
@@ -68,21 +69,11 @@ export class UserHandler {
           .cookie(
               'Authorization',
               data.access,
-              {
-                httpOnly: true,
-                sameSite: 'none',
-                maxAge: refreshPayload.exp,
-                secure: process.env.ENV === 'prod' ? true : false,
-              },
+              createAuthCookieOpts(refreshPayload.exp),
           ).cookie(
               'r',
               data.refresh,
-              {
-                httpOnly: true,
-                sameSite: 'none',
-                maxAge: refreshPayload.exp,
-                secure: process.env.ENV === 'prod' ? true : false,
-              },
+              createAuthCookieOpts(refreshPayload.exp),
           ).json({
             status: 'success',
             data: {token: data.access},
@@ -126,21 +117,11 @@ export class UserHandler {
         res.cookie(
             'Authorization',
             'Bearer ' + accessToken,
-            {
-              httpOnly: true,
-              sameSite: 'none',
-              maxAge: refreshPayload.exp,
-              secure: process.env.ENV === 'prod' ? true : false,
-            },
+            createAuthCookieOpts(refreshPayload.exp),
         ).cookie(
             'r',
             'Bearer ' + refreshToken,
-            {
-              httpOnly: true,
-              sameSite: 'none',
-              maxAge: refreshPayload.exp,
-              secure: process.env.ENV === 'prod' ? true : false,
-            },
+            createAuthCookieOpts(refreshPayload.exp),
         ).json({
           status: 'success',
           data: {token: accessToken},
