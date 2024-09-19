@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from 'express';
 import {Jwt} from '../../../infrastructure/security/Jwt';
-import {verifyAuthorizationCookie} from '../../../util/token';
+import {verifyAuthorizationCookie} from '../../../util/auth-cookie';
 import {AuthenticationError} from '../../../common/error/AuthenticationError';
 
 export const authenticationMiddleware = async (

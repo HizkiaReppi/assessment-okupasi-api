@@ -4,7 +4,7 @@ import {RefreshAuthenticationUsecase}
 import autoBind from 'auto-bind';
 import {Jwt} from '../../../../infrastructure/security/Jwt';
 import {JwtPayload} from 'jsonwebtoken';
-import {verifyRefreshCookie} from '../../../../util/token';
+import {verifyRefreshCookie} from '../../../../util/auth-cookie';
 
 export class AuthenticationHandler {
   constructor(
