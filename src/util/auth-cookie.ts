@@ -1,5 +1,16 @@
 import {AuthenticationError} from '../common/error/AuthenticationError';
 
+export function createAuthCookieOpts(exp?: number) {
+  return {
+    httpOnly: true,
+    sameSite: process.env.ENV === 'prod' ?
+      'none' as 'none' :
+      'strict' as 'strict',
+    maxAge: exp,
+    secure: process.env.ENV === 'prod' ? true : false,
+  };
+}
+
 export function verifyAuthorizationCookie(auth?: any) {
   const errMessage = new AuthenticationError();
 

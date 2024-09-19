@@ -4,7 +4,10 @@ import {RefreshAuthenticationUsecase}
 import autoBind from 'auto-bind';
 import {Jwt} from '../../../../infrastructure/security/Jwt';
 import {JwtPayload} from 'jsonwebtoken';
-import {verifyRefreshCookie} from '../../../../util/auth-cookie';
+import {
+  createAuthCookieOpts,
+  verifyRefreshCookie,
+} from '../../../../util/auth-cookie';
 
 export class AuthenticationHandler {
   constructor(
@@ -26,21 +29,11 @@ export class AuthenticationHandler {
       res.cookie(
           'Authorization',
           data.access,
-          {
-            httpOnly: true,
-            sameSite: 'none',
-            maxAge: refreshPayload.exp,
-            secure: process.env.ENV === 'prod' ? true : false,
-          },
+          createAuthCookieOpts(refreshPayload.exp),
       ).cookie(
           'r',
           data.refresh,
-          {
-            httpOnly: true,
-            sameSite: 'none',
-            maxAge: refreshPayload.exp,
-            secure: process.env.ENV === 'prod' ? true : false,
-          },
+          createAuthCookieOpts(refreshPayload.exp),
       ).json({
         status: 'success',
         data: {token: data.access},
