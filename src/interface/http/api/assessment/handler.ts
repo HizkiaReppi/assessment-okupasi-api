@@ -67,7 +67,7 @@ export class AssessmentHandler {
 
   async deleteById(req: Request, res: Response, next: NextFunction) {
     try {
-      await this.deleteAssessmentByIdUsecase.execute(req.params.Id);
+      await this.deleteAssessmentByIdUsecase.execute(req.params.id);
 
       res.json({status: 'success'});
     } catch (e) {
