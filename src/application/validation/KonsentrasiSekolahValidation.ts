@@ -7,6 +7,6 @@ export class KonsentrasiSekolahValidation {
         z.object({
           id: z.string().uuid(),
         }),
-    ).min(1),
+    ).optional(),
   });
 }
