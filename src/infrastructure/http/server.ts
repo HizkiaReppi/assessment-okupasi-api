@@ -9,6 +9,7 @@ import {userRouter} from '../../interface/http/api/user/router';
 import {okupasiRouter} from '../../interface/http/api/okupasi/router';
 import {sekolahRouter} from '../../interface/http/api/sekolah/router';
 import {konsentrasiRouter} from '../../interface/http/api/konsentrasi/router';
+import {assessmentRouter} from '../../interface/http/api/assessment/router';
 
 export const initServer = () => {
   const app = express();
@@ -31,6 +32,7 @@ export const initServer = () => {
       okupasiRouter(),
       sekolahRouter(),
       konsentrasiRouter(),
+      assessmentRouter(),
   );
   app.use(errorMiddleware);
 
