@@ -15,6 +15,12 @@ export type GetAllKonsentrasiInput = {
   page: number
 }
 
+export type GetAllKonsentrasiOutput = {
+  id: string
+  nama: string
+  total_sekolah: number
+}
+
 export type EditKonsentrasiReq = {
   id: string
   nama: string
