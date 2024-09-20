@@ -18,7 +18,7 @@ Response Body (Success):
 {
   "status": "success",
   "data": {
-    "kode": "e6314752-c753-47dc-bc82-eae480d1b094"
+    "id": "e6314752-c753-47dc-bc82-eae480d1b094"
   }
 }
 ```
@@ -58,7 +58,7 @@ Response Body (Success):
   "page": 1,
   "data": [
     {
-      "kode": "e6314752-c753-47dc-bc82-eae480d1b094",
+      "id": "e6314752-c753-47dc-bc82-eae480d1b094",
       "nama": "EXAMPLE"
     }
   ]
