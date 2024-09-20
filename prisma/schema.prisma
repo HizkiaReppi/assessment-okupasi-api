@@ -84,7 +84,6 @@ model Konsentrasi {
   @@map("konsentrasi")
 }
 
-
 model KonsentrasiSekolah {
   id_sekolah String
   sekolah Sekolah @relation(fields: [id_sekolah], references: [id], onDelete: Cascade)
@@ -93,4 +92,12 @@ model KonsentrasiSekolah {
 
   @@id([id_sekolah, id_konsentrasi])
   @@map("konsentrasi_sekolah")
+}
+
+model Assessment {
+  id String @id
+  title String @unique
+  url String
+
+  @@map("assessment")
 }
