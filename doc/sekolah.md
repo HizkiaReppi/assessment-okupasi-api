@@ -434,6 +434,16 @@ Response Body (Success):
       "jumlah_kelulusan": 90,
       "persentase_kelulusan": "90%",
       "kecocokan": "100%",
+      "konsentrasi": [
+        {
+          "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+          "nama": "RPL"
+        },
+        {
+          "id": "e6314752-c753-47dc-bc82-eae480d1b094",
+          "nama": "TKJ"
+        }
+      ],
       "okupasi": {
         "kode": "1238901",
         "nama": "EXAMPLE",

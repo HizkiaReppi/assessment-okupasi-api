@@ -42,6 +42,11 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
       this.db.sekolah.count({where}),
       this.db.sekolah.findMany({
         include: {
+          konsentrasi: {
+            include: {
+              konsentrasi: true,
+            },
+          },
           kompetensi: {
             where: {
               kompetensi: {
@@ -64,6 +69,13 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
         id: v.id,
         nama: v.nama,
         kota: v.kota,
+        konsentrasi: v.konsentrasi.map((konsentrasiSekolah) => {
+          const konsentrasi = konsentrasiSekolah.konsentrasi;
+          return {
+            id: konsentrasi.id,
+            nama: konsentrasi.nama,
+          };
+        }),
         unit_kompetensi: v.kompetensi.map((kompetensi) => {
           const kompetensiOkupasi = kompetensi.kompetensi;
           return {
