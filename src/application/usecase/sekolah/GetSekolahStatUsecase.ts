@@ -65,6 +65,7 @@ export class GetSekolahStatUsecase {
             sekolah.jumlah_kelulusan,
             sekolah.jumlah_siswa,
         ),
+        konsentrasi: sekolah.konsentrasi,
         kecocokan: calculatePercentage(
             kompetensiSekolahLen,
             okupasi.unit_kompetensi.length,

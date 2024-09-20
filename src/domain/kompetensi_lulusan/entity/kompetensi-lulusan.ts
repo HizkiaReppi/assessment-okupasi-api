@@ -29,6 +29,7 @@ export type GetAllKompetensiLulusanByKodeOkupasiOutput = {
   id: string
   nama: string
   kota: string
+  konsentrasi: {id: string, nama: string}[]
   unit_kompetensi: KompetensiOkupasi[]
 }
 
