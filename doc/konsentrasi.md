@@ -59,7 +59,8 @@ Response Body (Success):
   "data": [
     {
       "id": "e6314752-c753-47dc-bc82-eae480d1b094",
-      "nama": "EXAMPLE"
+      "nama": "EXAMPLE",
+      "total_sekolah": 10
     }
   ]
 }

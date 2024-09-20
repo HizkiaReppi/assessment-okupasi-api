@@ -1,10 +1,11 @@
-import {PrismaClient, Konsentrasi} from '@prisma/client';
+import {PrismaClient} from '@prisma/client';
 import {KonsentrasiRepository}
   from '../../domain/konsentrasi/KonsentrasiRepository';
 import {
   AddKonsentrasiInput,
   GetAllKonsentrasiInput,
   EditKonsentrasiInput,
+  GetAllKonsentrasiOutput,
 } from '../../domain/konsentrasi/entity/konsentrasi';
 import {countOffset} from '../../util/pagination';
 import {NotFoundError} from '../../common/error/NotFoundError';
@@ -25,21 +26,38 @@ export class KonsentrasiRepositoryImpl implements KonsentrasiRepository {
     }
   }
 
-  async getAll(req: GetAllKonsentrasiInput): Promise<[number, Konsentrasi[]]> {
+  async getAll(
+      req: GetAllKonsentrasiInput,
+  ): Promise<[number, GetAllKonsentrasiOutput[]]> {
     const where = {
       nama: {
         contains: req.search,
       },
     };
 
-    return await Promise.all([
+    const [totalResult, data] = await Promise.all([
       this.db.konsentrasi.count({where}),
       this.db.konsentrasi.findMany({
+        include: {
+          _count: {
+            select: {konsentrasiSekolah: true},
+          },
+        },
         where,
         skip: countOffset(req.page, req.limit),
         take: req.limit,
       }),
     ]);
+
+    const res = data.map((v) => {
+      const {_count, ...rest} = v;
+      return {
+        ...rest,
+        total_sekolah: _count.konsentrasiSekolah,
+      };
+    });
+
+    return [totalResult, res];
   }
 
   async editById(id: string, data: EditKonsentrasiInput): Promise<void> {
