@@ -52,7 +52,7 @@ export class AssessmentHandler {
   async editById(req: Request, res: Response, next: NextFunction) {
     try {
       const payload: EditAssessmentReq = {
-        id: req.params.Id,
+        id: req.params.id,
         title: req.body.title,
         url: req.body.url,
       };
