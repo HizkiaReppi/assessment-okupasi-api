@@ -5,6 +5,8 @@ import {
   GetAllSekolahInput,
   EditSekolahInput,
   GetSekolahOutput,
+  GetAllSekolahByKodeOkupasiInput,
+  GetAllSekolahByKodeOkupasiOutput,
 } from '../../domain/sekolah/entity/sekolah';
 import {countOffset} from '../../util/pagination';
 import {NotFoundError} from '../../common/error/NotFoundError';
@@ -92,6 +94,65 @@ export class SekolahRepositoryImpl implements SekolahRepository {
     };
 
     return res;
+  }
+
+  async getAllByKodeOkupasi(
+      req: GetAllSekolahByKodeOkupasiInput,
+  ): Promise<[number, GetAllSekolahByKodeOkupasiOutput[]]> {
+    const where = {
+      nama: {
+        contains: req.search,
+      },
+    };
+
+    const [totalResult, data] = await Promise.all([
+      this.db.sekolah.count({where}),
+      this.db.sekolah.findMany({
+        include: {
+          konsentrasi: {
+            include: {
+              konsentrasi: true,
+            },
+          },
+          kompetensi: {
+            where: {
+              kompetensi: {
+                kode_okupasi: req.kode_okupasi,
+              },
+            },
+            include: {
+              kompetensi: true,
+            },
+          },
+        },
+        where,
+        skip: countOffset(req.page, req.limit),
+        take: req.limit,
+        orderBy: {
+          kompetensi: {
+            _count: 'desc',
+          },
+        },
+      }),
+    ]);
+
+    const res: GetAllSekolahByKodeOkupasiOutput[] = data.map((v) => {
+      return {
+        id: v.id,
+        nama: v.nama,
+        kota: v.kota,
+        jumlah_siswa: v.jumlah_siswa,
+        jumlah_kelulusan: v.jumlah_kelulusan,
+        konsentrasi: v.konsentrasi.map((konsentrasiSekolah) => {
+          return konsentrasiSekolah.konsentrasi;
+        }),
+        unit_kompetensi: v.kompetensi.map((kompetensi) => {
+          return kompetensi.kompetensi;
+        }),
+      };
+    });
+
+    return [totalResult, res];
   }
 
   async editById(id: string, data: EditSekolahInput): Promise<void> {

@@ -4,8 +4,6 @@ import {KompetensiLulusanRepository}
 import {
   GetAllKompetensiLulusanByIdSekolahInput,
   GetAllKompetensiLulusanByIdSekolahOutput,
-  GetAllKompetensiLulusanByKodeOkupasiInput,
-  GetAllKompetensiLulusanByKodeOkupasiOutput,
   KompetensiLulusanInput,
 }
   from '../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
@@ -18,78 +16,6 @@ export class KompetensiLulusanRepositoryImpl implements KompetensiLulusanReposit
 
   async add(data: KompetensiLulusanInput[]): Promise<void> {
     await this.db.kompetensiLulusan.createMany({data});
-  }
-
-  async getAllByKodeOkupasi(
-      req: GetAllKompetensiLulusanByKodeOkupasiInput,
-  ): Promise<[number, GetAllKompetensiLulusanByKodeOkupasiOutput[]]> {
-    const where = {
-      nama: {
-        contains: req.search,
-      },
-      kompetensi: {
-        some: {
-          kompetensi: {
-            is: {
-              kode_okupasi: req.kode_okupasi,
-            },
-          },
-        },
-      },
-    };
-
-    const [totalResult, data] = await Promise.all([
-      this.db.sekolah.count({where}),
-      this.db.sekolah.findMany({
-        include: {
-          konsentrasi: {
-            include: {
-              konsentrasi: true,
-            },
-          },
-          kompetensi: {
-            where: {
-              kompetensi: {
-                kode_okupasi: req.kode_okupasi,
-              },
-            },
-            include: {
-              kompetensi: true,
-            },
-          },
-        },
-        where,
-        skip: countOffset(req.page, req.limit),
-        take: req.limit,
-      }),
-    ]);
-
-    const res: GetAllKompetensiLulusanByKodeOkupasiOutput[] = data.map((v) => {
-      return {
-        id: v.id,
-        nama: v.nama,
-        kota: v.kota,
-        konsentrasi: v.konsentrasi.map((konsentrasiSekolah) => {
-          const konsentrasi = konsentrasiSekolah.konsentrasi;
-          return {
-            id: konsentrasi.id,
-            nama: konsentrasi.nama,
-          };
-        }),
-        unit_kompetensi: v.kompetensi.map((kompetensi) => {
-          const kompetensiOkupasi = kompetensi.kompetensi;
-          return {
-            id: kompetensiOkupasi.id,
-            kode_okupasi: kompetensiOkupasi.kode_okupasi,
-            kode_unit: kompetensiOkupasi.kode_unit,
-            nama: kompetensiOkupasi.nama,
-            standard_kompetensi: kompetensiOkupasi.standard_kompetensi,
-          };
-        }),
-      };
-    });
-
-    return [totalResult, res];
   }
 
   async getAllByIdSekolah(

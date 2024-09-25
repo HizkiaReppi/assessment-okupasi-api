@@ -95,7 +95,6 @@ export function sekolahRouter() {
   const getOkupasiByKodeUsecase = new GetOkupasiByKodeUsecase(okupasiRepo);
   const getsekolahStatUsecase = new GetSekolahStatUsecase(
       sekolahRepo,
-      kompetensiLulusanRepo,
       okupasiRepo,
       getOkupasiByKodeUsecase,
   );
