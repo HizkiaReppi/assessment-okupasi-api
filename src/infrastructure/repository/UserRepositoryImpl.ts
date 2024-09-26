@@ -1,5 +1,4 @@
 import {PrismaClient, Users} from '@prisma/client';
-import {isPrismaError} from '../../common/error/prisma-error';
 import {UserRepository} from '../../domain/user/UserRepository';
 import {AddUserInput, LoginOutput} from '../../domain/user/entity/user';
 import {AuthenticationError} from '../../common/error/AuthenticationError';
@@ -10,13 +9,7 @@ export class UserRepositoryImpl implements UserRepository {
   constructor(private readonly db: PrismaClient) {}
 
   async add(req: AddUserInput): Promise<void> {
-    try {
-      await this.db.users.create({data: req});
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    await this.db.users.create({data: req});
   }
 
   async login(email: string): Promise<LoginOutput> {
@@ -52,23 +45,11 @@ export class UserRepositoryImpl implements UserRepository {
   }
 
   async changeEmail(id: string, email: string): Promise<void> {
-    try {
-      await this.db.users.update({where: {id}, data: {email}});
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    await this.db.users.update({where: {id}, data: {email}});
   }
 
   async changePassword(id: string, password: string): Promise<void> {
-    try {
-      await this.db.users.update({where: {id}, data: {password}});
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    await this.db.users.update({where: {id}, data: {password}});
   }
 
   async deleteById(id: string): Promise<void> {

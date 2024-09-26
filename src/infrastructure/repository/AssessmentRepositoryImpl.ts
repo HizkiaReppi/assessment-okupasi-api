@@ -9,22 +9,15 @@ import {
   GetAllAssessmentInput,
   GetAssessmentOutput,
 } from '../../domain/assessment/entity/assessment';
-import {isPrismaError} from '../../common/error/prisma-error';
 
 export class AssessmentRepositoryImpl implements AssessmentRepository {
   constructor(private readonly db: PrismaClient) {}
   async add(
       data: AddAssessmentInput,
   ): Promise<string> {
-    try {
-      const res = await this.db.assessment.create({data});
+    const res = await this.db.assessment.create({data});
 
-      return res.id;
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    return res.id;
   }
 
   async getAll(
@@ -48,13 +41,7 @@ export class AssessmentRepositoryImpl implements AssessmentRepository {
   }
 
   async editById(id: string, data: EditAssessmentInput): Promise<void> {
-    try {
-      await this.db.assessment.update({where: {id}, data});
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    await this.db.assessment.update({where: {id}, data});
   }
 
   async deleteById(id: string): Promise<void> {

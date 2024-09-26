@@ -9,21 +9,14 @@ import {
 } from '../../domain/konsentrasi/entity/konsentrasi';
 import {countOffset} from '../../util/pagination';
 import {NotFoundError} from '../../common/error/NotFoundError';
-import {isPrismaError} from '../../common/error/prisma-error';
 
 export class KonsentrasiRepositoryImpl implements KonsentrasiRepository {
   constructor(private readonly db: PrismaClient) {}
 
   async add(data: AddKonsentrasiInput): Promise<string> {
-    try {
-      const {id} = await this.db.konsentrasi.create({data});
+    const {id} = await this.db.konsentrasi.create({data});
 
-      return id;
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    return id;
   }
 
   async getAll(
@@ -61,13 +54,7 @@ export class KonsentrasiRepositoryImpl implements KonsentrasiRepository {
   }
 
   async editById(id: string, data: EditKonsentrasiInput): Promise<void> {
-    try {
-      await this.db.konsentrasi.update({where: {id}, data});
-    } catch (e) {
-      isPrismaError(e);
-
-      throw e;
-    }
+    await this.db.konsentrasi.update({where: {id}, data});
   }
 
   async deleteById(id: string): Promise<void> {

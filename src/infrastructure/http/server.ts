@@ -10,6 +10,8 @@ import {okupasiRouter} from '../../interface/http/api/okupasi/router';
 import {sekolahRouter} from '../../interface/http/api/sekolah/router';
 import {konsentrasiRouter} from '../../interface/http/api/konsentrasi/router';
 import {assessmentRouter} from '../../interface/http/api/assessment/router';
+import {prismaErrorMiddleware}
+  from '../../interface/http/middleware/prisma-error';
 
 export const initServer = () => {
   const app = express();
@@ -34,7 +36,7 @@ export const initServer = () => {
       konsentrasiRouter(),
       assessmentRouter(),
   );
-  app.use(errorMiddleware);
+  app.use(prismaErrorMiddleware, errorMiddleware);
 
   return app;
 };
