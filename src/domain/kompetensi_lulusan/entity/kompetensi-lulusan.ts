@@ -1,5 +1,3 @@
-import {KompetensiOkupasi} from '@prisma/client';
-
 export type KompetensiLulusanReq = {
   id: string
   kode: string
@@ -16,21 +14,6 @@ export type DeleteKompetensiLulusanReq = {
 export type KompetensiLulusanInput = {
   id_sekolah: string
   id_kompetensi_okupasi: string
-}
-
-export type GetAllKompetensiLulusanByKodeOkupasiInput = {
-  search?: string
-  limit: number
-  page: number
-  kode_okupasi: string
-}
-
-export type GetAllKompetensiLulusanByKodeOkupasiOutput = {
-  id: string
-  nama: string
-  kota: string
-  konsentrasi: {id: string, nama: string}[]
-  unit_kompetensi: KompetensiOkupasi[]
 }
 
 export type GetAllKompetensiLulusanByIdSekolahInput = {

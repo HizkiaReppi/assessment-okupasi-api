@@ -1,12 +1,7 @@
-import {KompetensiLulusanRepository}
-  from '../../../domain/kompetensi_lulusan/KompetensiLulusanRepository';
-import {
-  GetAllKompetensiLulusanByKodeOkupasiInput,
-  GetAllKompetensiLulusanByKodeOkupasiOutput,
-} from '../../../domain/kompetensi_lulusan/entity/kompetensi-lulusan';
 import {OkupasiRepository} from '../../../domain/okupasi/OkupasiRepository';
 import {SekolahRepository} from '../../../domain/sekolah/SekolahRepository';
 import {
+  GetAllSekolahByKodeOkupasiInput,
   GetSekolahStatInput,
   GetSekolahStatOutput,
 } from '../../../domain/sekolah/entity/sekolah';
@@ -17,7 +12,6 @@ import {calculatePercentage} from '../../../util/percentage';
 export class GetSekolahStatUsecase {
   constructor(
     private readonly sekolahRepo: SekolahRepository,
-    private readonly kompetensiLulusanRepo: KompetensiLulusanRepository,
     private readonly okupasiRepo: OkupasiRepository,
     private readonly getOkupasiByKodeUsecase: GetOkupasiByKodeUsecase,
   ) {}
@@ -33,27 +27,18 @@ export class GetSekolahStatUsecase {
 
     const okupasi = await this.getOkupasiByKodeUsecase.execute(kode_okupasi);
 
-    const sekolahPayload: GetAllKompetensiLulusanByKodeOkupasiInput = {
+    const sekolahPayload: GetAllSekolahByKodeOkupasiInput = {
       search,
       limit,
       page,
       // eslint-disable-next-line camelcase
       kode_okupasi,
     };
-
-    const [totalResult, sekolah] = await this.sekolahRepo
-        .getAll(sekolahPayload);
-
-    const sekolahWithKompetensi = await this.kompetensiLulusanRepo
+    const [totalResult, res] = await this.sekolahRepo
         .getAllByKodeOkupasi(sekolahPayload);
 
-    const data: GetSekolahStatOutput[] = sekolah.map((sekolah) => {
-      const kompetensiSekolah = this.findKompetensiSekolah(
-          sekolah.id,
-          sekolahWithKompetensi[1],
-      );
-      const kompetensiSekolahLen =
-        kompetensiSekolah ? kompetensiSekolah.length : 0;
+    const data: GetSekolahStatOutput[] = res.map((sekolah) => {
+      const kompetensiSekolahLen = sekolah.unit_kompetensi.length;
 
       return {
         id: sekolah.id,
@@ -73,34 +58,16 @@ export class GetSekolahStatUsecase {
         okupasi: {
           kode: okupasi.kode,
           nama: okupasi.nama,
-          unit_kompetensi: kompetensiSekolah ? kompetensiSekolah : [],
+          unit_kompetensi: sekolah.unit_kompetensi.map((unit) => {
+            return {
+              id: unit.id,
+              nama: unit.nama,
+            };
+          }),
         },
       };
     });
 
     return new Pagination({limit, page, totalResult, data});
-  }
-
-  private findKompetensiSekolah(
-      id: string,
-      data: GetAllKompetensiLulusanByKodeOkupasiOutput[],
-  ) {
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].id === id) {
-        const res = data[i].unit_kompetensi.map((unit) => {
-          return {
-            id: unit.id,
-            kode_unit: unit.kode_unit,
-            nama: unit.nama,
-            standard_kompetensi: unit.standard_kompetensi,
-          };
-        });
-        // remove the used element array
-        // to minimize the next loops
-        data.splice(i, 1);
-
-        return res;
-      }
-    }
   }
 }

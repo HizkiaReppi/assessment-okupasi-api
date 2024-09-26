@@ -1,4 +1,5 @@
 import {v4 as uuid} from 'uuid';
+import {KompetensiOkupasi, Konsentrasi} from '@prisma/client';
 
 export type AddSekolahReq = {
   nama: string
@@ -34,6 +35,23 @@ export type GetSekolahOutput = {
   }[]
 }
 
+export type GetAllSekolahByKodeOkupasiInput = {
+  search?: string
+  limit: number
+  page: number
+  kode_okupasi: string
+}
+
+export type GetAllSekolahByKodeOkupasiOutput = {
+  id: string
+  nama: string
+  kota: string
+  jumlah_siswa: number
+  jumlah_kelulusan: number
+  konsentrasi: Konsentrasi[]
+  unit_kompetensi: KompetensiOkupasi[]
+}
+
 export type GetSekolahStatInput = {
   search?: string
   limit: number
@@ -49,6 +67,7 @@ export type GetSekolahStatOutput = {
   jumlah_kelulusan: number
   persentase_kelulusan: string
   kecocokan: string
+  konsentrasi: Konsentrasi[]
   okupasi: {
     kode: string
     nama: string
